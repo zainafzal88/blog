@@ -7,13 +7,13 @@ env:
 phases:
   install:
     commands:
-        - gem install jekyll bundler jekyll-paginate jekyll-sitemap jekyll-gist jekyll-seo-tag
+        - gem install jekyll bundler jekyll-paginate jekyll-sitemap jekyll-gist jekyll-seo-tag sassc-2.2.1
   build:
     commands:
         - echo "******** Building Jekyll site ********"
         - jekyll build
-        - echo "******** Uploading to S3 ********"
-        - aws s3 sync _site/ s3://$BUCKET
+        # - echo "******** Uploading to S3 ********"
+        # - aws s3 sync _site/ s3://$BUCKET
   post_build:
     commands:
-        - aws cloudfront create-invalidation --distribution-id E2EDN7QC8COSCJ --paths '/*'  
+        # - aws cloudfront create-invalidation --distribution-id E2EDN7QC8COSCJ --paths '/*'  

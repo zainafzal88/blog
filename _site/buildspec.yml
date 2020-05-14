@@ -1,0 +1,19 @@
+version: 0.2
+
+env:
+  parameter-store:
+    BUCKET: /codebuild/blogBucket
+
+phases:
+  install:
+    commands:
+        - gem install jekyll bundler jekyll-paginate jekyll-sitemap jekyll-gist jekyll-seo-tag
+  build:
+    commands:
+        - echo "******** Building Jekyll site ********"
+        - jekyll build
+        - echo "******** Uploading to S3 ********"
+        - aws s3 sync _site/ s3://$BUCKET
+  post_build:
+    commands:
+        - aws cloudfront create-invalidation --distribution-id E2EDN7QC8COSCJ --paths '/*'  
