@@ -1,0 +1,2 @@
+I"><p>Local support for CodeBuild is extremely useful if you want save money and not use the AWS CodeBuild to build (for testing). Instead, run the builds locally when in development phase and trying to get things working. Once you get it building successfully, use the buildspec.yml in AWS CodeBuild project itself.</p>
+:ET
