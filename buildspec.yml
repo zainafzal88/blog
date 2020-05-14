@@ -1,8 +1,8 @@
 version: 0.2
 
-#env:
-#  parameter-store:
-#    BUCKET: /codebuild/blogBucket
+env:
+  parameter-store:
+    BUCKET: /codebuild/blogBucket
 
 phases:
   install:
@@ -14,6 +14,6 @@ phases:
         - jekyll build
   post_build:
     commands:
-        # - echo "******** Uploading to S3 ********"
-        # - aws s3 sync _site/ s3://$BUCKET
-        # - aws cloudfront create-invalidation --distribution-id E2EDN7QC8COSCJ --paths '/*'  
+        - echo "******** Uploading to S3 ********"
+        - aws s3 sync _site/ s3://$BUCKET
+        - aws cloudfront create-invalidation --distribution-id E2EDN7QC8COSCJ --paths '/*'  
