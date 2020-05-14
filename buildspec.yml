@@ -16,4 +16,5 @@ phases:
     commands:
         - echo "******** Uploading to S3 ********"
         - aws s3 sync _site/ s3://$BUCKET
-        - aws cloudfront create-invalidation --distribution-id E2EDN7QC8COSCJ --paths '/*'  
+        - echo "******** Invalidate Cache ********"
+        - aws cloudfront create-invalidation --distribution-id E2EDN7QC8COSCJ --paths '/*'

@@ -4,7 +4,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta http-equiv="X-UA-Compatible" content="ie=edge">
 <link href="https://fonts.googleapis.com/css?family=Nunito+Sans:400,400i,700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/blog/assets/css/style.css">
+<link rel="stylesheet" href="/assets/css/style.css">
 <title>Setting up CodeBuild locally</title>
 <!-- Begin Jekyll SEO tag v2.6.1 -->
 <title>Setting up CodeBuild locally | Zain Afzal</title>
@@ -47,25 +47,25 @@
 
 <p><code class="highlighter-rouge">git clone https://github.com/aws/aws-codebuild-docker-images.git</code></p>
 
-<p><img src="/blog/assets/images/2020-05-14/step1.png" alt="" /></p>
+<p><img src="/assets/images/2020-05-14/step1.png" alt="" /></p>
 
 <h3 id="step-2">Step 2</h3>
 
 <p>Open the repository in your VS Code  and navigate to <code class="highlighter-rouge">/aws-codebuild-docker-images/ubuntu/standard/3.0</code></p>
 
-<p><img src="/blog/assets/images/2020-05-14/step2.png" alt="" /></p>
+<p><img src="/assets/images/2020-05-14/step2.png" alt="" /></p>
 
 <h3 id="step-3">Step 3</h3>
 
 <p>Open Dockerfile present in <code class="highlighter-rouge">/aws-codebuild-docker-images/ubuntu/standard/3.0</code> to build a local CodeBuild standard 3.0 image</p>
 
-<p><img src="/blog/assets/images/2020-05-14/step3.png" alt="" /></p>
+<p><img src="/assets/images/2020-05-14/step3.png" alt="" /></p>
 
 <h3 id="step-4">Step 4</h3>
 
 <p>Remove the last line in that file that says <code class="highlighter-rouge">ENTRYPOINT [“dockerd-entrypoint.sh”]</code></p>
 
-<p><img src="/blog/assets/images/2020-05-14/step4.png" alt="" /></p>
+<p><img src="/assets/images/2020-05-14/step4.png" alt="" /></p>
 
 <h3 id="step-5">Step 5</h3>
 
@@ -73,7 +73,7 @@
 
 <p><code class="highlighter-rouge">docker build -t aws/codebuild/standard:3.0 .</code></p>
 
-<p><img src="/blog/assets/images/2020-05-14/step5.png" alt="" /></p>
+<p><img src="/assets/images/2020-05-14/step5.png" alt="" /></p>
 
 <h3 id="step-6">Step 6</h3>
 
@@ -85,7 +85,7 @@
 
 <p><code class="highlighter-rouge">docker pull amazon/aws-codebuild-local:latest --disable-content-trust=false</code></p>
 
-<p><img src="/blog/assets/images/2020-05-14/step6.1.png" alt="" /></p>
+<p><img src="/assets/images/2020-05-14/step6.1.png" alt="" /></p>
 
 <h4 id="step-62">Step 6.2</h4>
 
@@ -99,7 +99,7 @@
 
 <p><code class="highlighter-rouge">chmod +x codebuild_build.sh</code></p>
 
-<p><img src="/blog/assets/images/2020-05-14/step6.2.png" alt="" /></p>
+<p><img src="/assets/images/2020-05-14/step6.2.png" alt="" /></p>
 
 <h2 id="buiding-a-react-app-using-buildspecyml-and-upload-to-s3">Buiding A React App Using buildspec.yml and upload to S3</h2>
 
@@ -188,11 +188,11 @@ phases:
 
 <p>If everything goes well, you should see you React application in S3</p>
 
-<p><img src="/images/s3-before-upload.png" alt="" /></p>
+<p><img src="/assets/images/2020-05-14/s3-before-upload.png" alt="" /></p>
 
 <p>Hope it helped and you’re all up and running. If you faced any problems, let me know in the comments.</p>
 
-<p><img src="/images/s3-after-upload.png" alt="" /></p>
+<p><img src="/assets/images/2020-05-14/s3-after-upload.png" alt="" /></p>
 
       </div>
 
