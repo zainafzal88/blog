@@ -3,4 +3,4 @@
 source "https://rubygems.org"
 
 gem 'jekyll-seo-tag'
-gem 'sassc', '2.2.1'
+gem 'sassc'
