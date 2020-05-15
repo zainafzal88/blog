@@ -16,25 +16,25 @@ Clone this repository in your workspace
 
 `git clone https://github.com/aws/aws-codebuild-docker-images.git`
 
-![](/blog/assets/images/2020-05-14/step1.png)
+![](/assets/images/2020-05-14/step1.png)
 
 ### Step 2
 
 Open the repository in your VS Code  and navigate to `/aws-codebuild-docker-images/ubuntu/standard/3.0`
 
-![](/blog/assets/images/2020-05-14/step2.png)
+![](/assets/images/2020-05-14/step2.png)
 
 ### Step 3
 
 Open Dockerfile present in `/aws-codebuild-docker-images/ubuntu/standard/3.0` to build a local CodeBuild standard 3.0 image
 
-![](/blog/assets/images/2020-05-14/step3.png)
+![](/assets/images/2020-05-14/step3.png)
 
 ### Step 4
 
 Remove the last line in that file that says `ENTRYPOINT [“dockerd-entrypoint.sh”]`
 
-![](/blog/assets/images/2020-05-14/step4.png)
+![](/assets/images/2020-05-14/step4.png)
 
 ### Step 5
 
@@ -42,7 +42,7 @@ Run the below commands in /aws-codebuild-docker-images/ubuntu/standard/3.0. This
 
 `docker build -t aws/codebuild/standard:3.0 .`
 
-![](/blog/assets/images/2020-05-14/step5.png)
+![](/assets/images/2020-05-14/step5.png)
 
 ### Step 6
 
@@ -54,7 +54,7 @@ Get the latest by running
 
 `docker pull amazon/aws-codebuild-local:latest --disable-content-trust=false`
 
-![](/blog/assets/images/2020-05-14/step6.1.png)
+![](/assets/images/2020-05-14/step6.1.png)
 
 #### Step 6.2
 
@@ -68,7 +68,7 @@ Run the below commands to download the file codebuild_build.sh that contains all
 
 `chmod +x codebuild_build.sh`
 
-![](/blog/assets/images/2020-05-14/step6.2.png)
+![](/assets/images/2020-05-14/step6.2.png)
 
 ## Buiding A React App Using buildspec.yml and upload to S3
 
@@ -158,8 +158,8 @@ Create S3 bucket and name it as appropriate
 
 If everything goes well, you should see you React application in S3
 
-![](/images/s3-before-upload.png)
+![](/assets/images/2020-05-14/s3-before-upload.png)
 
 Hope it helped and you’re all up and running. If you faced any problems, let me know in the comments.
 
-![](/images/s3-after-upload.png)
+![](/assets/images/2020-05-14/s3-after-upload.png)

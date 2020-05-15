@@ -6,7 +6,7 @@ date:   2019-11-04
 ---
 This story will tell you how I immigrated from London, United Kingdom to Melbourne in Australia, obtained my Permanent Residency (PR) and landed my dream job after the PR even though I have experienced many hardships.
 
-![](/blog/assets/images/2019-11-4/plane.jpg)
+![](/assets/images/2019-11-4/plane.jpg)
 
 The main idea behind telling you my story is:
 1.  Anything is possible if you commit and dedicate yourself to it
@@ -34,7 +34,7 @@ From the first day I landed my objective was to get a Permanent Residency (PR).
 
 As I had more than enough savings to survive on, I went travelling for the first few months around Australia living a backpacker’s life. I was spending like a millionaire.
 
-![](/blog/assets/images/2019-11-4/throwingmoney.gif)
+![](/assets/images/2019-11-4/throwingmoney.gif)
 
 After meeting new people, I found out that my only option to extend my visa was by doing farm work. So, I did that for 3 months in Queensland. It was hard and physically intense however I made it through. Then, I returned to Melbourne with a peace of mind that if I can’t find a Software Development job with sponsorship, I can still stay here for another year.
 
@@ -42,23 +42,23 @@ An IT job was extremely hard to find. I was applying and getting responses back 
 
 One company (can’t disclose their name due to confidentiality reasons) wasn’t bothered about my visa status as they saw the potential in me. Not only they offered me the job but sponsored me too. I’d be forever grateful to that company. We lodged the Sponsorship Visa as soon as possible, however it was taking way too long (more than a year and still nothing). As I was already in a defacto relationship, while I was working, my partner was sorting her prerequisites for the PR. After she fulfilled the PR requirements, we had a faster option to get PR by me attaching to her and giving her 5 extra points. With this option, I wouldn’t be allowed to work until PR is granted. Hence, I quit my job and lodged the PR. Few months down and our PR.....
 
-![](/blog/assets/images/2019-11-4/career-visa.jpg)
+![](/assets/images/2019-11-4/career-visa.jpg)
 
 ## Job Hunt as a PR Holder
 I started applying to Software Developer jobs, this time as a PR holder. I started to work in logistics part-time as I need to make ends meet again. Yes, Melbourne is expensive!
 
 When I wasn’t working, I was coding, studying for certifications, applying for jobs and networking by going to meetups. Following were the main ones:
 
-![](/blog/assets/images/2019-11-4/devcop.png)
+![](/assets/images/2019-11-4/devcop.png)
 
 This meetup brings software professionals together. For instance, !issues they !are having at work, side projects, learning new technology and they want to share about it etc. I got my mentor from here. If you want surround yourself positive people who will push you to be better version of yourself everyday and are based in Melbourne, then join [here](https://www.meetup.com/en-AU/DevCoP-Melbourne). Highly Recommended from experience. **Also Sponsored Coffees, thanks to Robert Walters**
 
-![](/blog/assets/images/2019-11-4/awsmeetup.png) 
+![](/assets/images/2019-11-4/awsmeetup.png) 
 
 This was related to Amazon Web Service tools. It has **FREE** workshops about the new things you can do within AWS along with **free food and drinks**. Feel free to join this group [here](https://www.meetup.com/Melbourne-AWS-Programming-and-Tools-Meetup/). See you there I guess.
 
-![](/blog/assets/images/2019-11-4/winner.jpeg)	
-![](/blog/assets/images/2019-11-4/katie-jeyn.png)	
+![](/assets/images/2019-11-4/winner.jpeg)	
+![](/assets/images/2019-11-4/katie-jeyn.png)	
 
 This meetup is for people who want to succeed in life with anything they are trying to do, whether it be career goals, personal goals, relationships etc. The reason I attended was because it’s full of positive energy. You hear from people already achieving their goals, sharing their success stories which makes you realise that if they can do it, so can you. So, if you want to turn your life around like me, i'd highly recommend to join [here](https://www.meetup.com/en-AU/Ambitious-Leaders-Network-Melbourne/).
 
@@ -74,17 +74,17 @@ He recommended that I start a YouTube channel of coding and explaining my though
 
 He pushed me to get a Mac.
 
-![](/blog/assets/images/2019-11-4/mewithmac.jpeg)
+![](/assets/images/2019-11-4/mewithmac.jpeg)
 
 After getting it, I realised why. I became productive, doing more in less time. This increased my confidence.
 
-![](/blog/assets/images/2019-11-4/me.jpeg)
+![](/assets/images/2019-11-4/me.jpeg)
 
 He also pushed me to start writing blogs (this blog was his idea too).
 
 He pushed me to create my own website below and can be found [here](https://roarcoder.dev).
 
-![](/blog/assets/images/2019-11-4/msitee.png)
+![](/assets/images/2019-11-4/msitee.png)
 
 As time passed, I felt I was changing for the better and LOVED THE FEELING!
 
@@ -120,7 +120,7 @@ The next morning the recruiter called and said that the director liked me howeve
 
 Finally around 5pm the recruiter called with an OFFEEEERRRRR and I accepted straight away. 
 
-![](/blog/assets/images/2019-11-4/dreamjob.png)
+![](/assets/images/2019-11-4/dreamjob.png)
 
 All the hard work had paid off. I was so happy and emotional that I said, “I love you” (yes, I can’t believe I said that either) to the recruiter. My eyes welled with tears as I was speaking to him. As soon as I hung up, tears burst out and I thanked God Almighty for it. I called my parents and partner and talked while crying.
 
@@ -163,4 +163,4 @@ It has been a long journey however, it gave me many lessons:
 
 I started the role on 17th October 2019, and loving every millisecond of it.
 
-![](/blog/assets/images/2019-11-4/success.jpg)
+![](/assets/images/2019-11-4/success.jpg)
