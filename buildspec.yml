@@ -5,9 +5,6 @@ env:
     BUCKET: /codebuild/blogBucket
 
 phases:
-  install:
-    commands:
-        - gem install jekyll bundler jekyll-paginate jekyll-sitemap jekyll-gist sassc jekyll-seo-tag
   build:
     commands:
         - echo "******** Building Jekyll site ********"
