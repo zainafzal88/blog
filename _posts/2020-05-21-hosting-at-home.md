@@ -15,7 +15,7 @@ Full Disclosure: The idea was my mentor’s ( Paul Kukiel[link to linked in] ) a
 
 At the end, our architecture will look like this which includes your website hosted on Raspberry Pi and accessible via the public internet.
 
-![](/assets/images/2020-05-20/piarchitecture.png)
+![](/assets/images/2020-05-21/piarchitecture.png)
 
 Let’s go on the mission together.
 
@@ -82,7 +82,7 @@ Error Tip - If you insert the SD card and the monitors screen stay black.
 3.  Push it back in.
 4.  Insert the SD card in
 
-![](/assests/images/2020-05-21/pi-screen-black-error.jpeg)
+![](/assets/images/2020-05-21/pi-screen-black-error.jpeg)
 
 ##  Connect Pi to the Internet
 
@@ -547,7 +547,7 @@ where
 
 `nginx` - server name 
 
-13. Enable HTTPS (port 443) on Pi by running:
+15. Enable HTTPS (port 443) on Pi by running:
 ```
 sudo ufw allow 443
 ```
@@ -574,11 +574,11 @@ Port Forwarding allows you to forward the inbound traffic to your private networ
 
 7. Go to Port Forwarding and enable the following ports
 
-Port 22 for SSH
+    * Port 22 for SSH
 
-Port 80 for HTTP
+    * Port 80 for HTTP
 
-Port 443 for HTTPS
+    * Port 443 for HTTPS
 
 Below is how to forward Port 22, the others are similar
 
@@ -600,6 +600,6 @@ That’t it. Now you can access your website/blog through public internet.
 
 To test it, connect to your **Home Network WIFI** and enter your **Pi’s private IP** address in the browser.
 
-To test from the public internet, disconnect from your home WIFI and enter the [hostname].[domainName] in the URL and you should see the index.html you uploaded to Pi.
+To test from the public internet, disconnect from your home WIFI and enter the `[hostname].[domainName]` in the URL and you should see the `index.html` you uploaded to Pi.
 
 If it didn’t work, feel free to contact me from my [website](https://roarcoder.dev) . I’ll be happy to help :)
