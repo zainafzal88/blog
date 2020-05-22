@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "Turning Raspberry Pi into Web Server and Building CI/CD pipeline"
+title:  "Turn Raspberry Pi into Server and implement CI/CD pipeline"
 description: Turn your Raspberry Pi into a server and host your website/blog from home with custom domain using CI/CD pipeline for fast deployments
 date:   2020-05-21
 ---
@@ -24,23 +24,14 @@ Let’s go on the mission together.
 You will need the following
 
 * Micro USB
-
 * Power cable
-
 * HDMI cable
-
 * Micro-SD card (32GB recommended)
-
 * Keyboard
-
 * Raspberry Pi
-
 * Monitor with HDMI input
-
 * Router connect to WiFi
-
 * Mouse
-
 * SD Card Adapter
 
 ## Prepare the SD Card
@@ -82,7 +73,9 @@ Error Tip - If you insert the SD card and the monitors screen stay black.
 3.  Push it back in.
 4.  Insert the SD card in
 
-![](/assets/images/2020-05-21/pi-screen-black-error.jpeg)
+<p align="center">
+  <img width="300" height="400" src="/assets/images/2020-05-21/pi-screen-black-error.jpeg">
+</p>
 
 ##  Connect Pi to the Internet
 
@@ -251,19 +244,28 @@ Create a CI/CD pipeline in AWS with the source, Github and use CodeBuild to buil
 
 Login to AWS  > Services 
 
-![](/assets/images/2020-05-21/services.png)
+<p align="center">
+  <img src="/assets/images/2020-05-21/services.png">
+</p>
+
+
+![]()
 
 ### Step 2:
 
 Go to AWS Code Pipeline
 
-![](/assets/images/2020-05-21/pipeline.png)
+<p align="center">
+  <img src="/assets/images/2020-05-21/pipeline.png">
+</p>
 
 ## Step 3:
 
 Create a Pipeline
 
-![](/assets/images/2020-05-21/create-pipeline.png)
+<p align="center">
+  <img src="/assets/images/2020-05-21/create-pipeline.png">
+</p>
 
 ### Step 4:
 
@@ -271,25 +273,32 @@ Fill in the details
 
 Make sure the role has read access to S3, KMS and SSM for the below reasons:
 
-S3 will be storing our encrypted SSH Private keys and we need to get the private key from S3
+* S3 will be storing our encrypted SSH Private keys and we need to get the private key from S3
 
-KMS will be decrypting the ssh keys fetch from S3
+* KMS will be decrypting the ssh keys fetch from S3
 
-SSM will store our domain name
+* SSM will store our domain name
 
 Click Next
 
-![](/assets/images/2020-05-21/pipeline-details.png)
+<p align="center">
+  <img src="/assets/images/2020-05-21/pipeline-details.png">
+</p>
 
 ### Step 5:
 
 Select Github as a Source Stage. Once selected, click on button that say’s “Connect to Github“
 
-![](/assets/images/2020-05-21/source-stage.png)
+<p align="center">
+  <img src="/assets/images/2020-05-21/source-stage.png">
+</p>
 
 Once, connected, fill in the repository details
 
-![](/assets/images/2020-05-21/github-details.png)
+
+<p align="center">
+  <img src="/assets/images/2020-05-21/github-details.png">
+</p>
 
 Click Next.
 
@@ -299,53 +308,66 @@ Choose AWS CodeBuild as a Build provider from the dropdown and fill in the detai
 
 Once done, click Next
 
-![](/assets/images/2020-05-21/codebuild-details.png)
+<p align="center">
+  <img src="/assets/images/2020-05-21/codebuild-details.png">
+</p>
 
 ### Step 6.1
 
 Click build project:
 
-![](/assets/images/2020-05-21/create-build-project.png)
+<p align="center">
+  <img src="/assets/images/2020-05-21/create-build-project.png">
+</p>
 
 ### Step 6.2
 
 Name the project and scroll down
 
-![](/assets/images/2020-05-21/build-project-details.png)
+<p align="center">
+  <img src="/assets/images/2020-05-21/build-project-details.png">
+</p>
 
 ### Step 6.3:
 
 Choose a Source provider as Github from the dropdown and Connect to your GitHub account. Select whether the repo you are connecting in public or it’s your own. Then Scroll down.
 
-![](/assets/images/2020-05-21/build-source-details.png)
+<p align="center">
+  <img src="/assets/images/2020-05-21/build-source-details.png">
+</p>
 
 ### Step 6.4:
 
 Fill in environment details and scroll down
 
-![](/assets/images/2020-05-21/build-environment-details.png)
+<p align="center">
+  <img src="/assets/images/2020-05-21/build-environment-details.png">
+</p>
 
 ### Step 6.5
 
 Add a Service Role
 
-![](/assets/images/2020-05-21/role-name.png)
+<p align="center">
+  <img src="/assets/images/2020-05-21/role-name.png">
+</p>
 
 ### Step 6.6
 
 Choose _Use a buildspec file_(see the code after the below image for your buildspec file). This buildspec file must be in the root of your project directory
 
-![](/assets/images/2020-05-21/buildspec.png)
+<p align="center">
+  <img src="/assets/images/2020-05-21/buildspec.png">
+</p>
 
 The below is the code is the buildspec.yml
-
+```
 version: 0.1
 
 env:
   parameter-store:
     PI_DNS: /codebuild/piRoarcoder
 
-```
 phases:
   install:
     commands:
@@ -406,35 +428,48 @@ Artifacts is the output produced by the build. We don’t want to save them with
 
 Scroll down
 
-![](/assets/images/2020-05-21/build-artifacts.png)
+<p align="center">
+  <img src="/assets/images/2020-05-21/build-artifacts.png">
+</p>
 
 ### Step 6.8: 
 
 Leave everything default and Click “Create Build Project“
 
-![](/assets/images/2020-05-21/build-project-logs.png)
+<p align="center">
+  <img src="/assets/images/2020-05-21/build-project-logs.png">
+</p>
 
 ### Step 7:
 
 We won’t be using anything for the deploy stage, so click “Skip deploy stage”. 
 
-![](/assets/images/2020-05-21/deploy-stage.png)
+<p align="center">
+  <img src="/assets/images/2020-05-21/deploy-stage.png">
+</p>
 
 You will be asked to confirm it, click Skip
 
-![](/assets/images/2020-05-21/skip-deployment-stage.png)
+<p align="center">
+  <img src="/assets/images/2020-05-21/skip-deployment-stage.png">
+</p>
 
 ### Step 8:
 
 Review the pipeline, scroll to the bottom of the page, and click “Create Pipeline”
 
-![](/assets/images/2020-05-21/review-pipeline.png)
+<p align="center">
+  <img src="/assets/images/2020-05-21/review-pipeline.png">
+</p>
 
 ### Step 9:
 
 Your pipeline will be and the execution will be started automatically. (i have had to stop my execution as I just wanted to show you.
 
-![](/assets/images/2020-05-21/pipeline-execution.png)
+
+<p align="center">
+  <img src="/assets/images/2020-05-21/pipeline-execution.png">
+</p>
 
 Now as soon as you commit a change to your Github repository, this pipeline will be triggered automatically.
 
@@ -564,7 +599,9 @@ Port Forwarding allows you to forward the inbound traffic to your private networ
 
 3. Go to your Dynamic Domain Name Server (DDNS) setting and enable it. For me it was in _Internet_ → _Internet Services_
 
-![](/assets/images/2020-05-21/enable-ddns.png)
+<p align="center">
+  <img src="/assets/images/2020-05-21/enable-ddns.png">
+</p>
 
 4. Depending on your router, you’ll have a provider. I had DynDns.org and No-IP.com. I chose DynDns.org as my router wasn’t supported by No-IP.com
 
@@ -582,7 +619,9 @@ Port Forwarding allows you to forward the inbound traffic to your private networ
 
 Below is how to forward Port 22, the others are similar
 
-![](/assets/images/2020-05-21/port-mapping-ssh.png)
+<p align="center">
+  <img src="/assets/images/2020-05-21/port-mapping-ssh.png">
+</p>
 
 `Mapping Name` : Give your port a name
 
@@ -594,7 +633,9 @@ Then, click _Save_.
 
 At the end, your Port Mapping section should look like this
 
-![](/assets/images/2020-05-21/port-mapping.png)
+<p align="center">
+  <img src="/assets/images/2020-05-21/port-mapping.png">
+</p>
 
 That’t it. Now you can access your website/blog through public internet.
 
@@ -602,4 +643,4 @@ To test it, connect to your **Home Network WIFI** and enter your **Pi’s privat
 
 To test from the public internet, disconnect from your home WIFI and enter the `[hostname].[domainName]` in the URL and you should see the `index.html` you uploaded to Pi.
 
-If it didn’t work, feel free to contact me from my [website](https://roarcoder.dev) . I’ll be happy to help :)
+If it didn’t work, or you have question feel free to contact me via [LinkedIn](www.linkedin.com/in/zainafzal88) . I’ll be happy to help :)
