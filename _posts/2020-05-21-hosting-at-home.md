@@ -11,7 +11,7 @@ I was invited to a small community group called “A Slice of Pi” looking for 
 
 Via recommendation from the group I ordered a Raspberry Pi Zero. A few hours later, I recalled that I already have Raspberry Pi 3 that someone lent to me a while ago but was sitting unused. A huge smile came on my face just because I didn’t have to wait for the new one to come in the post.  The idea from the group was to setup a server at home “just because” is as a learning experience.
 
-Full Disclosure: The idea was my mentor’s ( Paul Kukiel[link to linked in] ) and he held numerous hands-on sessions (over zoom) with me and few other developer friends to teach us how to set up the server. After, that I got busy with other life’s stuff and couldn’t come back to it.
+Full Disclosure: The idea was my mentor’s, [Paul Kukiel](https://www.linkedin.com/in/paulkukiel/). He held numerous hands-on sessions (over zoom) with me and few other developer friends to teach us how to set up the server. After, that I got busy with other life’s stuff and couldn’t come back to it.
 
 At the end, our architecture will look like this which includes your website hosted on Raspberry Pi and accessible via the public internet.
 
@@ -107,29 +107,14 @@ You can use Pi from Linux, Mac or another Pi. I will tell you about Mac in this 
 
 First, we need to know the IP address of the Pi. To find this, type hostname -I from your Pi terminal. If you are running Pi  headless (without a monitor), you can find the IP address from the the device list on your router. 
 
-Secondly, install ufw (firewall) on Pi by running 
-```
-sudo apt-get install ufw
-```
-In order to use `ufw` we need to enable it to by running
-```
-ufw enable
-```
-To allow SSH (port 22) inbound connection, run
-```
-sudo ufw allow 22
-```
-By default, ufw denies all incoming connection. We just have one more step to take and that is enabling SSH from the rasp-config
-Open terminal up again, switch to super user by:
+We need enable SSH from the rasp-config. Open terminal, switch to super user by:
 ```
 sudo su
 ```
 Then, run 
-
 ```
 raspi-config
 ```
-
 Go to `Interface Option` and enable SSH.
 
 Now to SSH, open up the Terminal on your client and type
@@ -137,7 +122,6 @@ Now to SSH, open up the Terminal on your client and type
 ```
 ssh [piUser]@[Pi_IP_ADDRESS]
 ```
-
 **_Security tip: Make sure to change the default password for security reason._**
 
 **Code explanation:**
@@ -152,25 +136,7 @@ For example :
 ```
 ssh pi@111.111.1.1
 ```
-
 Upon pressing enter you’ll be prompted for password and that’s it, you’re in.
-
-
-## Setting up SSH keys
-
-1.  On your client, generate ssh key by running `ssh-keygen`
-2.  Provide answers to the questions asked.
-3.  Two keys will be generated, one public(with .pub extension) and one private(with no extension)
-4.  Copy the public key to Pi’s .`.ssh` directory (if none, create one).
-
-Now to SSH, open up the Terminal on your client and type 
-```
-ssh [piUser]@[Pi_IP_ADDRESS]
-```
-
-Note: the default username is `pi` and password is `raspberry` . Once you’re in, you can change your password.
-
-OPTIONAL -  If you don’t want to enter the password every time you ssh into Pi, rename the public key on Pi to `authorized_keys`.
 
 ## Install Nginx onto Pi
 
@@ -196,25 +162,6 @@ sudo apt install nginx
 
 `nginx` - Install the service named
 
-Once that’s installed successfully, we need to enable the firewall(`ufw`):
-```
-ufw enable
-```
-
-Now the firewall needs to be adjusted for the webserver. For that we need to allow traffic on port 80 by running:
-
-```
-sudo ufw allow 80
-```
-
-Then verify the change by running:
-
-```
-sudo ufw status
-```
-
-You should see HTTP traffic is allowed.
-
 ## Testing Web Server
 
 By now, the web server should already be up and running. To check run:
@@ -222,7 +169,6 @@ By now, the web server should already be up and running. To check run:
 ```
 sudo systemctl status nginx
 ```
-
 The output should display _active (running)_ in green colour
 
 This being said, the best way of testing is by requesting a page in the following way:
@@ -247,9 +193,6 @@ Login to AWS  > Services
 <p align="center">
   <img src="/assets/images/2020-05-21/services.png">
 </p>
-
-
-![]()
 
 ### Step 2:
 
@@ -294,7 +237,6 @@ Select Github as a Source Stage. Once selected, click on button that say’s “
 </p>
 
 Once, connected, fill in the repository details
-
 
 <p align="center">
   <img src="/assets/images/2020-05-21/github-details.png">
@@ -466,7 +408,6 @@ Review the pipeline, scroll to the bottom of the page, and click “Create Pipel
 
 Your pipeline will be and the execution will be started automatically. (i have had to stop my execution as I just wanted to show you.
 
-
 <p align="center">
   <img src="/assets/images/2020-05-21/pipeline-execution.png">
 </p>
@@ -505,7 +446,7 @@ We will use Certbot to get our SSL certificates. If you don’t know what Certbo
 > Certbot is a free, open source software tool for automatically using Let’s Encrypt certificates on manually-administrated websites to enable HTTPS.
 
 1.  Ssh into your pi
-2.  Install certbot uby running
+2.  Install certbot by running
 ```
 apt-get install certbot
 ```
@@ -540,13 +481,17 @@ certbot certonly --standalone -d [your-domain-name]
 cd /etc/nginx/sites-available
 ```
 
-9. Open default page
+9. Create another page
+```
+touch [your-domain-name]
+```
+10. Copy the content of `default` page into your newly created page
 
 ```
-vi default
+cp default [your-domain-name]
 ```
 
-10. Look for `listen 80;` and `server_name [some-domain]` and below them enter:
+11. Look for `listen 80;` and `server_name [some-domain]` and below them enter:
 ```
 listen 443 ssl default_server;
 ssl_certificate  [copy and past the line from step 6 that has fullchain.pem at the end]
@@ -554,10 +499,10 @@ ssl_certificate_key [copy and past the line from step 6 that has privkey.pem at 
 
 root /var/www/[folder-where-you-uploaded-your-site]
 ```
-11. Save and quit the file by press `ESC` and typing `:wq`
-12. Check if you synatx error in the config files by running
+12. Save and quit the file by press `ESC` and typing `:wq`
+13. Check if you synatx error in the config files by running
 ```
-nginx -t
+sudo nginx -t
 ```
 
 **Code Explanation**
@@ -573,7 +518,6 @@ You shouldn’t receive any errors
 ```
 sudo systemctl reload nginx
 ```
-
 where
 
 `systemctl` - controls the service manager and systemd system
@@ -586,7 +530,6 @@ where
 ```
 sudo ufw allow 443
 ```
-
 ## Access Pi Over The Public Internet
 
 As your Pi is in your private network, you can’t connect to it from the public internet with the current configuration. To do this, the router must be configured for Port Forwarding. 
