@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "Basic ASP.NET Core Web API Connected To PostgreSQL Deployed with CI/CD pipeline to Ubuntu"
+title:  "Basic ASP.NET Core Web API Connected To PostgreSQL Deployed with CI/CD pipeline to Linux"
 description: This guide shows how to deploy an ASP.NET Core Web API connected to PostgreSQL database to Raspberry Pi using CI/CD Pipeline
 date:   2020-06-08
 ---
@@ -8,7 +8,7 @@ The whole idea behind the migration was to eliminate AWS costs as it was hosted 
 
 If you don't have an ASP.NET Core Web API already, follow the instructions [here](https://blogs.roarcoder.dev/posts/dotnet-core-api/index.html) to create one and skip to **Create a New Project section and onwards**
 
-## Requirements
+## RequirementsUbunt
 1.  Raspberry Pi
 2.  PostgreSQL
 3.  .NET Core 3.1 [SDK](https://dotnet.microsoft.com/download/dotnet-core/thank-you/sdk-3.1.300-linux-arm32-binaries) and [Runtime](https://dotnet.microsoft.com/download/dotnet-core/thank-you/runtime-aspnetcore-3.1.4-linux-arm32-binaries)
@@ -59,7 +59,7 @@ You should see something similar to this:
   <img src="/assets/images/2020-06-08/dotnet-info.png">
 </p>
 
-If it doesn't work, you might have to reboot Ubuntu, `sudo reboot`
+If it doesn't work, you might have to reboot Linux, `sudo reboot`
 
 Now that we have .NET Core installed, let's move to the next phase
 
@@ -119,6 +119,7 @@ phases:
       - chmod 400 $HOME/decrypted_id_rsa
       - echo "******** Upload to Raspberry Pi ********"
       - scp -r -oStrictHostKeyChecking=no -i $HOME/decrypted_id_rsa ./bin/Release/netcoreapp3.1/* pi@$DOT_NET_CORE_API:/var/www/dotnet.roarcoder.dev
+      - sudo systemctl restart [your-file-name].service
     finally:
       - rm $HOME/decrypted_id_rsa
       - rm $HOME/encrypted_id_rsa
@@ -137,8 +138,10 @@ phases:
 
 `scp -r -oStrictHostKeyChecking=no -i $HOME/decrypted_id_rsa ./bin/Release/netcoreapp3.1/* pi@$DOT_NET_CORE_API:/var/www/dotnet.roarcoder.dev` - Transfer files from netcoreapp3.1 to website folder
 
+- `sudo systemctl restart [your-file-name].service` restart the service
 
-## Run API project as a service in Ubuntu using DLLs file
+
+## Run API project as a service using DLLs file
 
 Run the project as a service because you want the API to be running always.
 
