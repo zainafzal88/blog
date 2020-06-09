@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "Basic ASP.NET Core Web API Connected To PostgreSQL Deployed with CI/CD pipeline to Linux"
+title:  "Basic ASP.NET Core Web API Connected To PostgreSQL Deployed with CI/CD pipeline to Raspbian"
 description: This guide shows how to deploy an ASP.NET Core Web API connected to PostgreSQL database to Raspberry Pi using CI/CD Pipeline
 date:   2020-06-08
 ---
@@ -59,7 +59,7 @@ You should see something similar to this:
   <img src="/assets/images/2020-06-08/dotnet-info.png">
 </p>
 
-If it doesn't work, you might have to reboot Linux, `sudo reboot`
+If it doesn't work, you might have to reboot Raspbian, `sudo reboot`
 
 Now that we have .NET Core installed, let's move to the next phase
 
