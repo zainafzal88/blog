@@ -6,9 +6,16 @@ date:   2020-06-08
 ---
 The whole idea behind the migration was to eliminate AWS costs as it was hosted in AWS at first.
 
+## Architecture
+At the end, our architecture will look like:
+
+<p align="center">
+  <img src="/assets/images/2020-06-08/architecture.png">
+</p>
+
 If you don't have an ASP.NET Core Web API already, follow the instructions [here](https://blogs.roarcoder.dev/posts/dotnet-core-api/index.html) to create one and skip to **Create a New Project section and onwards**
 
-## RequirementsUbunt
+## Requirements
 1.  Raspberry Pi
 2.  PostgreSQL
 3.  .NET Core 3.1 [SDK](https://dotnet.microsoft.com/download/dotnet-core/thank-you/sdk-3.1.300-linux-arm32-binaries) and [Runtime](https://dotnet.microsoft.com/download/dotnet-core/thank-you/runtime-aspnetcore-3.1.4-linux-arm32-binaries)
