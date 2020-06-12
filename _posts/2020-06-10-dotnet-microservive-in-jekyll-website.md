@@ -1,14 +1,14 @@
 ---
 layout: post
 title:  Personal Website Building Journey and Next steps
-description: 
-date:   2020-06-11
+description: This shows you what steps I took to build my personal website with minimal costs and what I plan to do next.
+date:   2020-06-12
 ---
 I wanted to build my own website to create my personal branding. I saw my friend's CV in Jekyll, so I decided to make my website in it too. There are many other static site generators also, if you don't want to use Jekyll.
 
 At first, I hosted the website in AWS using S3, Cloudfront and Route53. This gave me a lot of hands on experience in AWS as I was preparing for my exam, Solution Architect simultaneously. I got to know ins and outs of the above mentioned AWS services. Then, I wanted to go a step further. Hence, I converted the monolithic structure of my website into microservices, Frontend and backend using AWS SAM (below section) and deployment using CI/CD pipeline as suggested by Paul. Having done this, after few weeks, I realised it was costing me a bit. Then I decided to host the personal website entirely in Raspberry Pi (see below). 
 
-The overall structure look like this:
+The overall structure looks like this:
 
 <p align="center">
   <img src="/assets/images/2020-06-12/personal-website.png">
