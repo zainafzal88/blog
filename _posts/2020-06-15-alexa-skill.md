@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Basics & Building of First Alexa Skill
+title:  Basics & Building of First Alexa Skill
 description: This post contains basic information and walkthrough of how to build your first Alexa skill
 date:   2020-06-15
 ---
