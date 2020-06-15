@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "Basic ASP.NET Core Web API Connected To PostgreSQL Deployed with CI/CD pipeline to Raspberry Pi OS"
+title:  "Basic ASP.NET Core Web API + PostgreSQL + CI/CD pipeline + Raspberry Pi OS"
 description: This guide shows how to deploy an ASP.NET Core Web API connected to PostgreSQL database to Raspberry Pi using CI/CD Pipeline
 date:   2020-06-08
 ---

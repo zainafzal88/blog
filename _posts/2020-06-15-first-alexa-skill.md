@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  Basics & Building of First Alexa Skill
+title:  Basics & Building First Alexa Skill
 description: This post contains basic information and walkthrough of how to build your first Alexa skill
 date:   2020-06-15
 ---
@@ -16,7 +16,7 @@ So, how Alexa skills work is, it consists of three components
 I'll explain using a diagram:
 
 <p align="center">
-  <img src="/assets/images/2020-06-14/how-alexa-skills-work.png">
+  <img src="/assets/images/2020-06-15/how-alexa-skills-work.png">
 </p>
 
 ### Alexa Cloud
@@ -65,170 +65,143 @@ I will be building an extremely simple skill called **Cake Walk** which would ca
 ### Frontend
 
 1.  Go to [AmazonDeveloper](https://developer.amazon.com)
-
 2.  Click **Alexa**
-
 3.  Click **Create Alexa Skills**
     <p align="center">
-        <img src="/assets/images/2020-06-14/create-alexa-skill.png">
+        <img src="/assets/images/2020-06-15/create-alexa-skill.png">
     </p>
-
 4. Click **Console**
     <p align="center">
-        <img src="/assets/images/2020-06-14/click-console.png">
+        <img src="/assets/images/2020-06-15/click-console.png">
     </p>
-
 5.  Click **Create Skill**
     <p align="center">
-    <img src="/assets/images/2020-06-14/create-skill.png">
+    <img src="/assets/images/2020-06-15/create-skill.png">
     </p>
-
 6.  Enter skills name as **Cake Walk** and language as **English (US)**
-
     <p align="center">
-    <img src="/assets/images/2020-06-14/skill-name.png">
+    <img src="/assets/images/2020-06-15/skill-name.png">
     </p>
 
 7. Leave the rest as default and click **Create Skill**
-
     This will take you to next page
-
 8.  Choose template **Hello World** and click **Continue With Template** on the top right
     <p align="center">
-        <img src="/assets/images/2020-06-14/template.png">
+        <img src="/assets/images/2020-06-15/template.png">
     </p>
-
     It will take couple of minutes to create an Alexa Hosted Skill and prepare the code editor. Your screen should look like this:
     <p align="center">
-        <img src="/assets/images/2020-06-14/code-editor.png">
+        <img src="/assets/images/2020-06-15/code-editor.png">
     </p>
-
 The above is known as a **Dashboard**.
-
 The red rectangule showing in the above image is what can be called as build phases:
-
 *   Build    
     You build the frontend of the skill in this section.
-
 *   Code   
     Backend coding of the skill take place.
-
 *   Test   
     Combine the build and code together and test using simulator.
-
 *   Distribution    
     Publishing of a skills takes place here like giving a logo, a company.
-
 *   Certification   
     A process to make sure your the skill does what the owner says it does, fully functional and does error out.
-
 *   Analytics   
     Examine how the skill is being used by users.
 
 9.  Click on **Invocation name**    
     Invocation Name is _what you say to activate a skill_
     <p align="center">
-    <img src="/assets/images/2020-06-14/enter-invocation-name.png">
+        <img src="/assets/images/2020-06-15/enter-invocation-name.png">
     </p>
 10.  Delete the current **HelloWorldIntent**
-    <p align="center">
-    <img src="/assets/images/2020-06-14/delete-hello-world-intent.png">
-    </p>
-
+        <img src="/assets/images/2020-06-15/delete-hello-world-intent.png">
 11. To create a new intent, Click **Add Intent**
-
     <p align="center">
-    <img src="/assets/images/2020-06-14/create-intent.png">
+        <img src="/assets/images/2020-06-15/create-intent.png">
     </p>
-
 12. Enter `CaptureBirthdayIntent` and click **Create Custom Intent**
-
     <p align="center">
-    <img src="/assets/images/2020-06-14/capture-birthday-intent.png">
+        <img src="/assets/images/2020-06-15/capture-birthday-intent.png">
     </p>
 
-Now we need to enter Sample Utterences. Like we discussed earlier, utterences are what the user says. To give birthdays to the computer we can say for example
+    Now we need to enter Sample Utterences. Like we discussed earlier, utterences are what the user says. To give birthdays to the computer we can say for example
 
-*   My birthday is on 6 March 1998
-*   I was born on 31 April 1988
+    *   My birthday is on 6 March 1998
+    *   I was born on 31 April 1988
 
-There can be many variations but i'll leave it at this. One thing to note is there are be many dates, years, month for birthday and it will be cubersome to manually present these as options to the user. This is where slot values come in. 
+    There can be many variations but i'll leave it at this. One thing to note is there are be many dates, years, month for birthday and it will be cubersome to manually present these as options to the user. This is where slot values come in. 
 
-The above utterences can be update with slots like:
+    The above utterences can be update with slots like:
 
-*   My birthday is on {date} {month} {year}
-*   I was born on {date} {month} {year}
+    *   My birthday is on {date} {month} {year}
+    *   I was born on {date} {month} {year}
 
-where `{date}`, `{month}` and `{year}` are slot values (variables) which store what ever the user stores in theme depending on their data type.
-
+    where `{date}`, `{month}` and `{year}` are slot values (variables) which store what ever the user stores in theme depending on their data type.
 13. Now enter some utterences and click the `+` to add.
     <p align="center">
-    <img src="/assets/images/2020-06-14/add-utterence.png">
+    <img src="/assets/images/2020-06-15/add-utterence.png">
     </p>
 Add another variation.
     <p align="center">
-    <img src="/assets/images/2020-06-14/add-utterence-1.png">
+    <img src="/assets/images/2020-06-15/add-utterence-1.png">
     </p>
 
 14. Add data types for the slots
 
-*   Click on `year` and select `AMAZON.FOUR_DIGIT_NUMBER` from the **Slot Type** dropdown
-
+    *   Click on `year` and select `AMAZON.FOUR_DIGIT_NUMBER` from the **Slot Type** dropdown
     <p align="center">
-    <img src="/assets/images/2020-06-14/slot-data-type-1.png">
+    <img src="/assets/images/2020-06-15/slot-data-type-1.png">
     </p>
-
-*   `{year}` as `AMAZON.FOUR_DIGIT_NUMBER`
-*   `{date}` as `AMAZON.DATE`
-*   `{month}` as `AMAZON.Ordinal`
+    *   `{year}` as `AMAZON.FOUR_DIGIT_NUMBER`
+    *   `{date}` as `AMAZON.DATE`
+    *   `{month}` as `AMAZON.Ordinal`
 
 15. Scroll down on the same page and turn on the **Slot Filling**. 
     Slot filling means that it is mandatory to fill this slot otherwise the intent won't complete.
 
     <p align="center">
-    <img src="/assets/images/2020-06-14/slot-filling-date.png">
+    <img src="/assets/images/2020-06-15/slot-filling-date.png">
     </p>
 
 16. Input `what date of the year were you born` in **Alexa speech prompts**
     
     <p align="center">
-        <img src="/assets/images/2020-06-14/date-slot-filling.png">
+        <img src="/assets/images/2020-06-15/date-slot-filling.png">
     </p>
-
-This means that if a user forgets to provide the date, the above message will be spoken. You can add many and Alexa will randomely pick one.
+    This means that if a user forgets to provide the date, the above message will be spoken. You can add many and Alexa will randomely pick one.
 
 17. Input `i was born on {date}` and just `date` for **User utterences**
 
     <p align="center">
-        <img src="/assets/images/2020-06-14/user-utterences.png">
+        <img src="/assets/images/2020-06-15/user-utterences.png">
     </p>
 
-In the above, you can predict what user will say in response to you speech prompts.
+    In the above, you can predict what user will say in response to you speech prompts.
 
 18. Do the same for `{month}` and `{year}` (small exercise for you)
 
 19. Go back to `CaptureBirthdayIntent`
     
     <p align="center">
-        <img src="/assets/images/2020-06-14/go-back.png">
+        <img src="/assets/images/2020-06-15/go-back.png">
     </p>
 
 20. Choose `enable auto delegation` from **Dialog Delegation Strategy** dropdown
 
     <p align="center">
-        <img src="/assets/images/2020-06-14/enable-auto-delegation.png">
+        <img src="/assets/images/2020-06-15/enable-auto-delegation.png">
     </p>
 
 21. Click **Save Model** to save and then **Build Model** to build
     
     <p align="center">
-        <img src="/assets/images/2020-06-14/save-and-build.png">
+        <img src="/assets/images/2020-06-15/save-and-build.png">
     </p>
 
     You should see notfication that says `Full Build Successfully` like: 
 
     <p align="center">
-        <img src="/assets/images/2020-06-14/full-build-successful.png">
+        <img src="/assets/images/2020-06-15/full-build-successful.png">
     </p>
 
 This concludes our frontend now, let's move to backend.
@@ -238,34 +211,32 @@ This concludes our frontend now, let's move to backend.
 1.  Go to **Code**
 
     <p align="center">
-        <img src="/assets/images/2020-06-14/go-to-code.png">
+        <img src="/assets/images/2020-06-15/go-to-code.png">
     </p>
 
-Every intent as its own handler at the backend as you can see `HelloWorldIntentHandler` which we removed from the frontend in the beginning. We will be modifying this to match our `CaptureBirthdayIntent`. But first, let's discuss how to backend works with the frontend.
+    Every intent as its own handler at the backend as you can see `HelloWorldIntentHandler` which we removed from the frontend in the beginning. We will be modifying this to match our `CaptureBirthdayIntent`. But first, let's discuss how to backend works with the frontend.
 
-The `LaunchRequesthandler` gets fired up when a user activates a skill saying the `invocation name` in our case it's `Cake Walk` which in turn calls the `LaunchRequest` (shown below). This means your skill has been requested to launch.
-<p align="center">
-    <img src="/assets/images/2020-06-14/launch-request.png">
-</p>
+    The `LaunchRequesthandler` gets fired up when a user activates a skill saying the `invocation name` in our case it's `Cake Walk` which in turn calls the `LaunchRequest` (shown below). This means your skill has been requested to launch.
+    <p align="center">
+        <img src="/assets/images/2020-06-15/launch-request.png">
+    </p>
 
 2.  Now let's modify the handler like below:
 
     <p align="center">
-        <img src="/assets/images/2020-06-14/modify-request-handler.png">
+        <img src="/assets/images/2020-06-15/modify-request-handler.png">
     </p>
 
-When we speak our skill invocation name, it will check `canHandle(handlerInput)` to check if the request can be handled. If it can, then it will execute `handle(handlerInput)` which in turn speech prompts `Welcome to Cake Walk! When is your birthday?` If you don't want to keep the session open after Alexa has completed its job, simply remove `reprompt(speakOutput)`.
+    When we speak our skill invocation name, it will check `canHandle(handlerInput)` to check if the request can be handled. If it can, then it will execute `handle(handlerInput)` which in turn speech prompts `Welcome to Cake Walk! When is your birthday?` If you don't want to keep the session open after Alexa has completed its job, simply remove `reprompt(speakOutput)`.
 
 3.  Click **Save** and **Deploy**
     
     <p align="center">
-        <img src="/assets/images/2020-06-14/save-and-deploy.png">
+        <img src="/assets/images/2020-06-15/save-and-deploy.png">
     </p>
 
 If all went well, you should see a notification like below:
-    <p align="center">
-        <img src="/assets/images/2020-06-14/deployment-success.png">
-    </p>
+        <img src="/assets/images/2020-06-15/deployment-success.png">
 
 Finally we are done with frontend and backend development. hopefully everything went well for you
 
@@ -276,25 +247,25 @@ To test it, you can use both, typing and voice. Howevr, it's highly recommended 
 1.  Now go to **Test**
 
     <p align="center">
-        <img src="/assets/images/2020-06-14/go-to-test.png">
+        <img src="/assets/images/2020-06-15/go-to-test.png">
     </p>
 
 2.  From the **Skill Testing is enable in** dropdown, choose **Development**
 
     <p align="center">
-        <img src="/assets/images/2020-06-14/skill-test-in-development.png">
+        <img src="/assets/images/2020-06-15/skill-test-in-development.png">
     </p>
 
 3.  Type your skill invocation name `Cake Walk` and it should display the response we gave in backend step 2.
     
     <p align="center">
-        <img src="/assets/images/2020-06-14/testing-1.png">
+        <img src="/assets/images/2020-06-15/testing-1.png">
     </p>
 
 4. If you followed all along correctly, you will see:
 
     <p align="center">
-        <img src="/assets/images/2020-06-14/testing-2.png">
+        <img src="/assets/images/2020-06-15/testing-2.png">
     </p>
 
 ### Testing CaptureBirthdayIntent
@@ -304,13 +275,13 @@ To test it, you can use both, typing and voice. Howevr, it's highly recommended 
 *   Replace `HelloWorldIntent` with `CaptureBirthdayIntent`
 *   `const speakOut` = `'Thanks'`
     <p align="center">
-        <img src="/assets/images/2020-06-14/testing-3.png">
+        <img src="/assets/images/2020-06-15/testing-3.png">
     </p>
 
 2.  Scroll down to `exports.handler = Alexa.SkillBuilders.custom()` and replace `HelloWorldIntentHandler` with `CaptureBirthdayIntentHandler`
 
     <p align="center">
-        <img src="/assets/images/2020-06-14/testing-4.png">
+        <img src="/assets/images/2020-06-15/testing-4.png">
     </p>
 
 3. Click **Save** and **Deploy**
@@ -318,7 +289,7 @@ To test it, you can use both, typing and voice. Howevr, it's highly recommended 
 4. Now, test in the simulator
 
     <p align="center">
-        <img src="/assets/images/2020-06-14/testing-intent.png">
+        <img src="/assets/images/2020-06-15/testing-intent.png">
     </p>
 
 Well done for making your first Alexa skill. Hopefully you have a good understanding about Alexa now. If you faced any problem, feel free to get in touch and I'll help you out.
