@@ -2,7 +2,7 @@
 layout: post
 title:  CSS Positioning 
 description: Full explanation of CSS positioning values, static, fixed, relative, absolute and sticky
-date:   2020-06-19
+date:   2020-06-18
 ---
 I found myself constantly being confused between different positioning values in CSS. Hence, I decided to go back and understand them fully in order to get a concrete understanding of each of them.
 
@@ -34,7 +34,7 @@ CSS code of this property look like:
 With HTML code found [here](https://github.com/zainafzal88/css-positioning), the above results in:
 
 <p align="center">
-  <img src="/assets/images/2020-06-19/static-positioning.png">
+  <img src="/assets/images/2020-06-18/static-positioning.png">
 </p>
 
 ## Relative
@@ -54,7 +54,7 @@ It's written as `position: relative;` CSS code is:
 With HTML code found [here](https://github.com/zainafzal88/css-positioning), the above results in:
 
 <p align="center">
-  <img src="/assets/images/2020-06-19/relative-positioning.png">
+  <img src="/assets/images/2020-06-18/relative-positioning.png">
 </p>
 
 As you can see above that the `Div 1` is overlapping `Div 2` and `Div 3` which clearly shows that `Div 1` is no longer "embedded" in the page and it's free to move without caring how it effects other elements in the page.
@@ -64,7 +64,7 @@ Positions the element next to its nearest parent. It doesn't care about other el
 
 Before Absolute Positioning:
 <p align="center">
-  <img src="/assets/images/2020-06-19/before-absolute-positioning.png">
+  <img src="/assets/images/2020-06-18/before-absolute-positioning.png">
 </p>
 CSS code to get below layout:
 ```
@@ -78,12 +78,12 @@ With HTML code found [here](https://github.com/zainafzal88/css-positioning/commi
 
 After Absolute Positioning:
 <p align="center">
-  <img src="/assets/images/2020-06-19/after-absolute-positioning.png">
+  <img src="/assets/images/2020-06-18/after-absolute-positioning.png">
 </p>
 
 By applying property `top:10px` on absolute position observe how the element goes relative to the viewport(browser)
 <p align="center">
-  <img src="/assets/images/2020-06-19/absolute-positioning-top.png">
+  <img src="/assets/images/2020-06-18/absolute-positioning-top.png">
 </p>
 ```
 .child-one {
@@ -110,7 +110,7 @@ To avoid the above behaviour, we can simple apply `position: relative` to its ne
 ```
 With HTML code found [here](https://github.com/zainafzal88/css-positioning/commit/88da6bc2298c3159090e6456b8c685e2f5567b6a)
 <p align="center">
-  <img src="/assets/images/2020-06-19/absolute-relative-positioning.png">
+  <img src="/assets/images/2020-06-18/absolute-relative-positioning.png">
 </p>
 
 ## Sticky
@@ -136,7 +136,7 @@ CSS code would look like:
 Positions the element next to the viewport (browser) and "glues" it in one place even when the user scrolls. Either of the properties, top, left, right and bottom are compulsory to be user with this. Otherwise, it won't work
 
 <p align="center">
-  <img src="/assets/images/2020-06-19/fixed-positioning.png">
+  <img src="/assets/images/2020-06-18/fixed-positioning.png">
 </p>
 
 CSS would look like:
