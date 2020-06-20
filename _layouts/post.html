@@ -15,24 +15,14 @@
       <div class="post-container">
           {{ content }}
       </div>
+      <br/>
 
-        <!-- Configure Disqus -->
-      {%- if site.texture.disqus_shortname -%}
-        <div id="disqus_thread" style="margin-top:25px"></div>
-        <script>
-          var disqus_config = function () {
-            this.page.url = '{{ page.url | absolute_url }}';
-            this.page.identifier = '{{ page.url | absolute_url }}';
-          };
-          (function() {
-            var d = document, s = d.createElement('script');
-            s.src = 'https://{{ site.texture.disqus_shortname }}.disqus.com/embed.js';
-            s.setAttribute('data-timestamp', +new Date());
-            (d.head || d.body).appendChild(s);
-          })();
-        </script>
-        <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
-      {%- endif -%}
+      <h2>Comments</h2>
+      <form class="form-group" action="" method="post">
+        <textarea id="comment" name="comment" class="form-control" rows="5"></textarea>
+        <button style="margin-top:1.1em;"class="btn btn-primary" type="submit">Submit</button>
+      </form>
+      
     </div>
   </main>
   {%- include footer.html -%}
