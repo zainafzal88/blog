@@ -4,6 +4,9 @@ email: zain_afzal000@hotmail.co.uk
 description: > # this means to ignore newlines until "show_exerpts:"
 show_excerpts: true # set to true to show excerpts on the homepage
 thene: texture
+name:         Zain Shares
+description:  Learn, Share, Contribute
+url:          https://blogs.roarcoder.dev
 # baseurl: /blog
 
 # Minima date format
@@ -37,4 +40,4 @@ texture:
 
 plugins:
   - jekyll-seo-tag
-#  - jekyll-feed
+  - jekyll-feed
