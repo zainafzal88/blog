@@ -8,6 +8,7 @@ phases:
   build:
     commands:
         - echo "******** Building Jekyll site ********"
+        - gem install jekyll-feed -v 0.3.1
         - jekyll build
   post_build:
     commands:
