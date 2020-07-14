@@ -4,6 +4,8 @@ title:  Securing EC2 Instance
 description: In this post i'll show you how to secure your EC2 instance using ssh and IAM roles and policies
 date:   2020-07-14
 ---
+This post is based on my learnings from [FooBar's video](https://www.youtube.com/watch?v=9dpPCJxtHe0). If you prefer to see the video instead, please click [here](https://www.youtube.com/watch?v=9dpPCJxtHe0)
+
 When you are trying to access any AWS service from your EC2 instance (virtual server), giving proper permission and securing your EC2 is essential. You should always follow the best practice known as "least privilege" principle for permissions which means that only give your EC2 least amount of permissions that it needs to get the job done.
 
 Along with the permissions you should also make sure that your EC2 instance is secured as you don't want anyone hacking into your server and steal all the important files you have. Securing an EC2 instance can be done via Secure Shell (SSH) and Security Groups which are nothing more than virtual firewalls.
@@ -80,7 +82,7 @@ Essentially, what an IAM role is the ability to give a non-human set of permissi
 *   Click **Create role** button
 *   Under **Choose a use case**, choose **EC2**
 *   Click **Next: Permission** in the bottom right
-*   We won't attach any policies(permissions) yet as there is an interesting aspect with EC2 that I found from the [video](https://www.youtube.com/watch?v=9dpPCJxtHe0) at 13:40 which is a service in a background that provides API credentials to that instance and rotates every 15 minutes for us. So, will see how we go from no credentials to having credentials without policies to prove that we have the credentials in place.
+*   We won't attach any policies(permissions) yet as there is an interesting aspect with EC2 that I found from the [video]() at 13:40 which is a service in a background that provides API credentials to that instance and rotates every 15 minutes for us. So, will see how we go from no credentials to having credentials without policies to prove that we have the credentials in place.
 *   No tags needed
 *   Give the role a name
 *   Click **Create role**
