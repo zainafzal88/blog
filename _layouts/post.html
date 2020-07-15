@@ -15,6 +15,25 @@
       <div class="post-container">
           {{ content }}
       </div>
+      <br/>
+      <hr/>
+      <div class="comments-view">
+        <form id="comments" name="comments" action="index.js" method="POST">
+          <h4>Please Share Thoughts</h4>
+          <br/>
+          <input id="name" type="name" class="form-control" placeholder="Enter your email">
+          <br/>
+          <textarea id="comment" class="form-control" placeholder="Share thoughts here"></textarea>
+          <br/>
+          <input type="submit" class="btn btn-primary" value="Comment"/>
+          <br/>
+          <br/>
+        </form>
+        <div id="all-comments" class="show-comments">
+          No comments
+        </div>
+      </div>
+      <br/>
     </div>
   </main>
   {%- include footer.html -%}
