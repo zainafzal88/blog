@@ -6,20 +6,60 @@
   </script>
   <script>
   $(function(){
-      $.ajax({
-        type: "GET",
-        url: "https://nnlzo10st4.execute-api.ap-southeast-2.amazonaws.com/Prod/api/comments",
-        crossDomain: true,
-        contentType: "application/json",
-        dataType: "json",
-        success: function(data){
-          for (var i=0; i < data.items.length; i++){
 
-          }
+    let allComments =  document.getElementById("all-comments");
+    let $name = $("#name");
+    let $comment = $("#comment");
+
+    $.ajax({
+      type: "GET",
+      url: "https://nnlzo10st4.execute-api.ap-southeast-2.amazonaws.com/Prod/api/comments",
+      crossDomain: true,
+      contentType: "application/json",
+      dataType: "json",
+      success: function(data){
+
+        for (var i=0; i < data.items.length; i++){
+
+          allComments.innerHTML += 
+            '<label id="username">' + data.items[i].username.s + '</label>' +
+            '<p id="comment">' + data.items[i].comment.s + '</p>' +
+            '<hr/>'
         }
-      })
-    })
+      },
+      error: function (){
+        alert("Error getting comments");
+      }
+
+    });
+
+    $("#submit").on('click', function(){
+
+      var item = 
+      {
+        username: $name.val(),
+        comment: $comment.val(),
+      };
+
+      $.ajax({
+        type: "POST",
+        url: "https://nnlzo10st4.execute-api.ap-southeast-2.amazonaws.com/Prod/api/comments",
+        data: JSON.stringify(item),
+        contentType: "application/json",
+        success : function(){
+          alert("Comment submitted successfully")
+          location.reload();
+        },
+        error : function(err){
+          alert("error in post" + JSON.stringify(err))
+        }
+      });
+      $name.val("");
+      $comment.val("");
+    });
+  });
 </script>
+
   {%- include head.html -%}
 </head>
 <body>
@@ -37,20 +77,16 @@
       <br/>
       <hr/>
       <div class="comments-view">
-        <form id="comments" name="comments" action="index.js" method="POST">
-          <h4>Please Share Thoughts</h4>
-          <br/>
-          <input id="name" type="name" class="form-control" placeholder="Enter your email">
-          <br/>
-          <textarea id="comment" class="form-control" placeholder="Share thoughts here"></textarea>
-          <br/>
-          <input type="submit" class="btn btn-primary" value="Comment"/>
-          <br/>
-          <br/>
-        </form>
-        <div id="all-comments" class="show-comments"> 
-          No comments
-        </div>
+        <h4>Please Share Thoughts</h4>
+        <br/>
+        <input id="name" type="name" class="form-control" placeholder="Enter your email">
+        <br/>
+        <textarea id="comment" class="form-control" placeholder="Share thoughts here"></textarea>
+        <br/>
+        <button id="submit" class="btn btn-primary" >Comment</button>
+        <br/>
+        <br/>
+        <div id="all-comments" class="show-comments"><!--Comments populated by script above--></div>
       </div>
       <br/>
     </div>
