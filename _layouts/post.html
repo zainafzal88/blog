@@ -20,11 +20,12 @@
       success: function(data){
 
         for (var i=0; i < data.items.length; i++){
-
-          allComments.innerHTML += 
-            '<label id="username">' + data.items[i].username.s + '</label>' +
-            '<p id="comment">' + data.items[i].comment.s + '</p>' +
-            '<hr/>'
+          if(data.items[i].postId.s == window.location.pathname) {
+            allComments.innerHTML += 
+              '<label id="username">' + data.items[i].username.s + '</label>' +
+              '<p id="comment">' + data.items[i].comment.s + '</p>' +
+              '<hr/>'
+          }
         }
       },
       error: function (){
@@ -39,6 +40,7 @@
       {
         username: $name.val(),
         comment: $comment.val(),
+        postId: window.location.pathname,
       };
 
       $.ajax({
