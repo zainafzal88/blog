@@ -59,7 +59,7 @@ I will share my learnings about SQS, SNS, EventBridge and Kinesis from [this](ht
 
 *   Not restricted to only AWS, 3rd party provider events can be used too.
 
-## Kineis
+## Kinesis
 *   Ingest data from anywhere into your AWS Cloud in real time.
 
 *   Has very high throughput
