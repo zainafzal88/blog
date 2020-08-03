@@ -2,7 +2,7 @@
 layout: post
 title:  "Microsoft Azure Fundamentals - Part 2"
 description: Study Guide for AZ-900 - Azure Fundamentals Certification
-date:   2020-08-01
+date:   2020-08-04
 ---
 This is a continuation of [Part 1](https://blogs.roarcoder.dev/posts/azure-learnings/index.html). If haven't already read that, you should go though that before continuing further.
 
