@@ -1,12 +1,10 @@
 ---
 layout: post
 title:  ASP.NET Core API Web API + DynamoDB Locally
-description: This is a walkthrough of accessing DynamoDB locally using ASP.NET Core Web API 
+description: This is a walkthrough of accessing DynamoDB locally using ASP.NET Core Web API
 date:   2020-07-06
 ---
-I wanted to create a commenting system for my [blog](https://blogs.roarcoder.dev) instead of using an existing one in order to learn how it's build which was the idea of my friend Paul.
-
-I needed a database to store and manage all the comments. Hence, I chose DynamoDB. I chose to create the API in Lambda using C#. All of this is done using AWS Serverless Application Model (SAM).
+In this post, I will show you how to connect and read data from DynamoDB locally
 
 ## What's Covered
 *  Create the ASP.NET Core Web API
