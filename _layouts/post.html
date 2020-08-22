@@ -36,26 +36,35 @@
 
     $("#submit").on('click', function(){
 
-      var item = 
-      {
-        username: $name.val(),
-        comment: $comment.val(),
-        postId: window.location.pathname,
-      };
+      var reg =/<(.|\n)*?>/g;
 
-      $.ajax({
-        type: "POST",
-        url: "https://nnlzo10st4.execute-api.ap-southeast-2.amazonaws.com/Prod/api/comments",
-        data: JSON.stringify(item),
-        contentType: "application/json",
-        success : function(){
-          alert("Comment submitted successfully")
-          location.reload();
-        },
-        error : function(err){
-          alert("error in post" + JSON.stringify(err))
-        }
-      });
+      if (reg.test($('#comment').val()) == true) {
+        var errorText ='HTML Tags Not Allowed';
+        alert(errorText);
+      }
+      else  {
+
+        var item = 
+        {
+          username: $name.val(),
+          comment: $comment.val(),
+          postId: window.location.pathname,
+        };
+
+        $.ajax({
+          type: "POST",
+          url: "https://nnlzo10st4.execute-api.ap-southeast-2.amazonaws.com/Prod/api/comments",
+          data: JSON.stringify(item),
+          contentType: "application/json",
+          success : function(){
+            alert("Comment submitted successfully")
+            location.reload();
+          },
+          error : function(err){
+            alert("error in post" + JSON.stringify(err))
+          }
+        });
+      }
       $name.val("");
       $comment.val("");
     });
@@ -83,7 +92,7 @@
         <br/>
         <input id="name" type="name" class="form-control" placeholder="Enter your email">
         <br/>
-        <textarea id="comment" class="form-control" placeholder="Share thoughts here"></textarea>
+        <textarea id="comment" class="form-control" required patttern="[a-zA-Z0-9 ]+" placeholder="Share thoughts here"></textarea>
         <br/>
         <button id="submit" class="btn btn-primary" >Comment</button>
         <br/>
