@@ -6,6 +6,12 @@ date:   2020-09-12
 ---
 In this post we will be building an interactive Tic Tac Toe game in React to learn the fundamentals of React. However, let's get familiar with React core concepts theoratically first.
 
+### Pre-requisites
+* HTML, CSS and Javscript
+* Your favourite text editor
+* ES6 ( latest version of Javscript at the time of this blog )
+* [Node](https://nodejs.org/en/) installed
+
 ### What is React
 A Javascript library that is used to build intuitive, modern and beautiful user interfaces.
 
@@ -34,7 +40,7 @@ The above code simply says that this is a component called `Person` and it retur
 </p>
 which clearly shows that `<div>` above are converted to  `React.createElement('div')` in compile time. 
 
-As `render` method returns a React element (displays the description of what to show to the user), the syntax of it isn't used by React developers. Instead `<div />` is used which is a lot easier and cleaner to write.
+As `render` method returns a React element (displays the description of what to show to the user), the syntax of it isn't used by React developers. Instead `<div />` is used which is a lot easier and cleaner to write which is called the JSX syntax. Basically you can put any javascript code inside HTML using curly braces `{}`.
 
 You use the above component in the `container` element or any other element like below:
 <p align="center">
@@ -46,3 +52,205 @@ These are the parameters that a components takes in. `Props` are short for prope
 <p align="center">
   <img src="/assets/images/2020-09-12/4.png">
 </p>
+
+### State
+This is what components use to remember the values of variable at different stages if the values are updated.
+
+Some concepts to know about `state`:
+1. State is set in the constructor like the below:
+      <p align="center">
+        <img src="/assets/images/2020-09-12/initialize-state.png">
+      </p>
+2. `this.state` is considered private to it's component
+
+Now that we have some theoratical foundation of React, let's build a Tic Tac Toe game using our knowledge so far.
+
+## Set Up Project
+1. Run the below command to create a react project
+  ```
+  npx create-react-app tic-tac-toe
+  ```
+      <p align="center">
+        <img src="/assets/images/2020-09-12/create-react-project.png">
+      </p> 
+Upon successful creation, you should see the below:
+      <p align="center">
+        <img src="/assets/images/2020-09-12/project-created-successfully.png">
+      </p>
+  
+2. `cd` into the project folder and open in VS Code ( or your favourite text editor )
+      <p align="center">
+        <img src="/assets/images/2020-09-12/cd-into-project.png">
+      </p>
+        
+      Your project structure should look like this:
+      <p align="center">
+        <img src="/assets/images/2020-09-12/project-before-deletion.png">
+      </p>
+3. Delete everything in `src` folder **but not the folder itself**
+      <p align="center">
+        <img src="/assets/images/2020-09-12/project-after-deletion.png">
+      </p>
+
+4. Add a file called `index.css` in the `src` folder
+5. Add the below code in the `index.css` file.
+```
+      body {
+          font: 14px "Century Gothic", Futura, sans-serif;
+          margin: 20px;
+        }
+        
+        ol, ul {
+          padding-left: 30px;
+        }
+        
+        .board-row:after {
+          clear: both;
+          content: "";
+          display: table;
+        }
+        
+        .status {
+          margin-bottom: 10px;
+        }
+        
+        .square {
+          background: #fff;
+          border: 1px solid #999;
+          float: left;
+          font-size: 24px;
+          font-weight: bold;
+          line-height: 34px;
+          height: 34px;
+          margin-right: -1px;
+          margin-top: -1px;
+          padding: 0;
+          text-align: center;
+          width: 34px;
+        }
+        
+        .square:focus {
+          outline: none;
+        }
+        
+        .kbd-navigation .square:focus {
+          background: #ddd;
+        }
+        
+        .game {
+          display: flex;
+          flex-direction: row;
+        }
+        
+        .game-info {
+          margin-left: 20px;
+        }
+```
+  6. Add a file called `index.js` in the `src` folder
+  7. Add the below code in the `index.js` file.
+```
+      class Square extends React.Component {
+          render() {
+            return (
+              <button className="square">
+                {/* TODO */}
+              </button>
+            );
+          }
+        }
+        
+        class Board extends React.Component {
+          renderSquare(i) {
+            return <Square />;
+          }
+        
+          render() {
+            const status = 'Next player: X';
+        
+            return (
+              <div>
+                <div className="status">{status}</div>
+                <div className="board-row">
+                  {this.renderSquare(0)}
+                  {this.renderSquare(1)}
+                  {this.renderSquare(2)}
+                </div>
+                <div className="board-row">
+                  {this.renderSquare(3)}
+                  {this.renderSquare(4)}
+                  {this.renderSquare(5)}
+                </div>
+                <div className="board-row">
+                  {this.renderSquare(6)}
+                  {this.renderSquare(7)}
+                  {this.renderSquare(8)}
+                </div>
+              </div>
+            );
+          }
+        }
+        
+        class Game extends React.Component {
+          render() {
+            return (
+              <div className="game">
+                <div className="game-board">
+                  <Board />
+                </div>
+                <div className="game-info">
+                  <div>{/* status */}</div>
+                  <ol>{/* TODO */}</ol>
+                </div>
+              </div>
+            );
+          }
+        }
+        
+        // ========================================
+        
+        ReactDOM.render(
+          <Game />,
+          document.getElementById('root')
+        );
+```
+What the above Javascript consist and does is it has three components, `Sqaure`, `Board` and `Game`. `Square` -> displays one button, `Board` ->  displays 9 squares and `Game` ->  displays the board with values as a placeholder.
+
+7. Add the below three lines in the `index.js` file
+```
+import React from 'react';
+import ReactDOM from 'react-dom';
+import './index.css';
+```
+8. Navigate to the terminal project folder in the terminal and run `npm start`. If everything went smooth you should see the below screen in browser and note that you can't interactive with any component for now.
+<p align="center">
+  <img src="/assets/images/2020-09-12/localhost-start.png">
+</p>
+Now that our project is all set up, we will do the core functionalities features that is used in React frequently and once has to know which are:
+* Pass Data Using Props (properties)
+* Making Component Interactive
+* Playing with State
+
+### Pass Data Using Props (Properties)
+This is one of the core functionalities you will need when building applications in React. Let's get our hands dirty.
+
+We will pass data from Board to Square component. 
+
+To do this, we will add a prop `value` to the `renderSquare` method in Board component
+<p align="center">
+  <img src="/assets/images/2020-09-12/pass-prop.png">
+</p>
+In the the square component replace `{/* TODO */}` with `{this.props.value}` to get the value of `value` from Board component like below
+<p align="center">
+  <img src="/assets/images/2020-09-12/passed-prop.png">
+</p>
+
+If you did everything correct, you should see the value on each square when you run the application with `npm start`.
+<p align="center">
+  <img src="/assets/images/2020-09-12/after-props.png">
+</p>
+
+In this game's example, Board is a parent and Sqaure is a child component which means you have just passed a prop from parent to child component.
+
+### Making Component Interactive
+To play the game, we need to be able to click on the squares, which is why we will make the squares clickable so that when clicked they display 'X'.
+
