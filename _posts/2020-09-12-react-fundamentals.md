@@ -254,3 +254,21 @@ In this game's example, Board is a parent and Sqaure is a child component which 
 ### Making Component Interactive
 To play the game, we need to be able to click on the squares, which is why we will make the squares clickable so that when clicked they display 'X'.
 
+1. Add an `onClick` prop to the button that is returned from the square component and display an alert
+    <p align="center">
+      <img src="/assets/images/2020-09-12/button-clicked.png">
+    </p>  
+  Notice how we have used `{}` with `onClick` prop. This is how we write javsacript inside HTML in React.
+2. Now go to the browser and when you click a square, you should see an alert.
+    <p align="center">
+      <img src="/assets/images/2020-09-12/button-clicked-in-browser.png">
+    </p>
+3. To simplify the code a bit, we will use arrow function.
+    <p align="center">
+      <img src="/assets/images/2020-09-12/arrow-function.png">
+    </p>
+4. We will use `this.state` to make React remember when a square has been clicked and mark it with an "X". So let's add state to the constructor(that's how states are set in React) and set to null initially.
+    <p align="center">
+      <img src="/assets/images/2020-09-12/state-null.png">
+    </p>
+    The state will be changed when the square is clicked.
