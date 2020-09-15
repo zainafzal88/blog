@@ -267,8 +267,20 @@ To play the game, we need to be able to click on the squares, which is why we wi
     <p align="center">
       <img src="/assets/images/2020-09-12/arrow-function.png">
     </p>
-4. We will use `this.state` to make React remember when a square has been clicked and mark it with an "X". So let's add state to the constructor(that's how states are set in React) and set to null initially.
+4. We will use `this.state` to make React remember when a square has been clicked, mark it with a "X". So let's add `this.state` to the constructor (that's how states are set in React) and set to `null` initially.
     <p align="center">
       <img src="/assets/images/2020-09-12/state-null.png">
     </p>
-    The state will be changed when the square is clicked.
+    The state will be changed when the square is clicked. Moreover, you have to call `super(props)` in the constructor of the child class
+5. Replace `this.props.value` by `this.state.value` in the `<button>`
+6. Remove `onClick={...}` add `onClick={() => this.setState(value:'X')}`. Your Sqaure component should look like:
+    <p align="center">
+      <img src="/assets/images/2020-09-12/update-state.png">
+    </p>
+      What the above code does is by default, the value of state `value` is `null` and when user clicks the button, this updates the state `value` to "X" with `this.setState`(by calling this, state is updated automatically) and then displays the updated state as the text in the button with `this.state.value`
+7. Now go to the browser and click on the squares. You should see "X" appearing.
+
+    <video width="320" height="240" controls>
+      <source src="/assets/images/2020-09-12/square-with-crosses.mov">
+    </video>
+8. Now we need to add "O" to our games as Tic Tac Toe has to have "Xs" and "0s" to be played. However, we will add them every alternative turns
