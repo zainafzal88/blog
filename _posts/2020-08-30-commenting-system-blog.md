@@ -4,7 +4,7 @@ title:  Build a Commenting System Using SAM in .NET
 description: This is a walkthrough of how I built my commenting system for my blog with ASP.NET Core Web API and AWS DynamoDB using SAM
 date:   2020-08-30
 ---
-I wanted to create a commenting system for my blog instead of using an existing one in order to learn how it’s build which was the idea of my friend Paul.
+I wanted to create a commenting system for my blog. My friend Paul encouraged me to build my own instead of using an off-the-shelve one. I thought it will be a good exercise to know how the commenting system are actually built. Below I share the steps involved in getting this system up and running!
 
 ## What's Covered
 * Serverless Template
@@ -120,7 +120,7 @@ dotnet restore
 ```
 dotnet run
 ```
-8. Use VS Code or any of your favourite text editor and open the project folder
+8. Use VS Code or your favourite text editor and open the project folder
 9. Notice four new files in addition to the normal files new .NET project area created.
 <p align="center">
   <img src="/assets/images/2020-08-30/project-folder-content.png">
@@ -133,7 +133,7 @@ dotnet run
 
 ## Integrating Swagger UI
 
-1. We will be using [Swagger](https://swagger.io/) to document our Web API and test it from the browser. Add NuGet package for Swagger
+1. We will be using [Swagger](https://swagger.io/) to document our Web API and test it from the browser. Add the NuGet package for Swagger
 ```
 dotnet add package Swashbuckle.AspNetCore
 ```
@@ -171,7 +171,7 @@ app.UseSwaggerUI(c =>
 dotnet add package AWSSDK.DynamoDBv2
 dotnet add package AWSSDK.Extensions.NETCore.Setup 
 ```
-`AWSSDK.DynamoDBv2` - Add the sufficients support to interact with DynamoDB using AWS .NET SDK
+`AWSSDK.DynamoDBv2` - Adds the ability to interact with DynamoDB using AWS .NET SDK
 `AWSSDK.Extensions.NETCore.Setup` - has methods for configuration and registrations of AWS Services with dependency injection.
 2. Now we need to register Dynamo Service. In the `Startup.cs` file, add the below code in `ConfigureServices` method:
 ```
@@ -190,14 +190,14 @@ services.AddAWSService<IAmazonDynamoDB>();
 services.AddAWSService<Amazon.S3.IAmazonS3>();
 ```
     
-    Now, that we are connected, Let's read from database
+    Now, that we are connected, let's read from database
 
-    As we don't have anything to read from the database, first, we add a a record in the database manually to test our reading functionality and I am assuming you know how to add a record in the table. When you have written the record
+    As we don't have anything to read from the database, first, we add a a record in the database manually to test our reading functionality and I am assuming you know how to add a record in the table.
 
 ## Getting all Comments from AWS DynamoDB (By Post)
 In this section, we will get all the comments by Post. So, each post displays only comments that related to it
 
-After registering IAmazonDynamoDB in our applicaiton we are now in the position to insert it using Microsoft Dependency injection in our Controller. 
+After registering IAmazonDynamoDB in our application we are now in the position to insert it using Microsoft Dependency injection in our Controller. 
 
 1. Delete the two controllers, `S3ProxyController` and `ValuesController` in the controllers folder
 2. Right click on **Controllers** folder > **New C# Class**
@@ -210,7 +210,7 @@ After registering IAmazonDynamoDB in our applicaiton we are now in the position 
 [EnableCors("AllowOrigin")] 
 ```
 
-If you get red squiffly lines, in the above three line, import what's needed
+If you get red squiggly lines, in the above three lines, import what's needed
 
 **Code Explanation:**
 
@@ -382,14 +382,14 @@ namespace CommentsAPI.Models
 
 `[FromBody]` - Annotate thats take all the content from the body
 
-The rest logic is just taking all the user inputs and inserting them in relevated column in the database asynchronously
+This function is taking the user's input and inserting it into the relevant column in the database asynchronously
 
 ## Deleting Comment From DynamoDB
 This can be done in two ways
 1. Manually by logging into AWS and deleting the record from the DynamoDB Table
 2. Click a button from the frontend.
 
-As a blog owner, I believe users shouldn't have the ability to delete comments. Hence, I didn't implement this, However, if you want to implement it, please copy paste the below code in the `CommentsController` and do an AJAX request from the frontend on the click of a button provide the comment that need to be deleted is selected.
+As a blog owner, I believe users shouldn't have the ability to delete comments. Hence, I didn't implement this, However, if you want to implement it, please copy paste the below code in the `CommentsController` and do an AJAX request from the frontend on the click of a button provided that the comment that needs to be deleted is selected.
 ```
     [HttpDelete("{id}")]
     public async Task Delete(string id)
@@ -406,4 +406,4 @@ As a blog owner, I believe users shouldn't have the ability to delete comments. 
         await _amazonDynamoDb.DeleteItemAsync(request);
     }
 ```
-Congratulations!!! You have sucessfully implemented your own commenting system for you website / blog etc. However, if any of the above didn't work for you, please leave a comment below and i'll contact you via email
+You have successfully implemented your own commenting system for your website / blog etc. If any of the above didn't work for you, please leave a comment below and I'll contact you via email
