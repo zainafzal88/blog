@@ -284,3 +284,12 @@ To play the game, we need to be able to click on the squares, which is why we wi
       <source src="/assets/images/2020-09-12/square-with-crosses.mov">
     </video>
 8. Now we need to add "O" to our games as Tic Tac Toe has to have "Xs" and "0s" to be played. However, we will add them every alternative turns
+
+### Determining Winner
+In order to determine the winner, we need to keep count of the value of the 9 squares we have in a place. This can be done in two ways:
+* **`Board` component to ask each of the square about its state**
+    
+    We can do this however, the code will not look neat, readable and be prone to many bugs, not to mention the complexity.
+* **Store the entire game's state in the `Board` component**
+
+    We will go with this one as it's much neater, readbale, simple and easy as the `Board` component will pass the value to `Sqaure` component that will be displayed in each square via `prop`.  
