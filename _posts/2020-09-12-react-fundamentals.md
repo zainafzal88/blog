@@ -292,4 +292,19 @@ In order to determine the winner, we need to keep count of the value of the 9 sq
     We can do this however, the code will not look neat, readable and be prone to many bugs, not to mention the complexity.
 * **Store the entire game's state in the `Board` component**
 
-    We will go with this one as it's much neater, readbale, simple and easy as the `Board` component will pass the value to `Sqaure` component that will be displayed in each square via `prop`.  
+    We will go with this one as it's much neater, readable, simple and easy as the `Board` component will pass the value to `Sqaure` component that will be displayed in each square via `prop`. 
+
+    To action the above decided approach, we need to give the control of the state to the `Board` component which means that `state` will need to be declared in the `Board` component instead of the `Square`.
+
+1. Begin with adding a constructor in the `Board` component and set it to have 9 `nulls` which are associated with 9 squares.
+    <p align="center">
+      <img src="/assets/images/2020-09-12/lifting-state-up.png">
+    </p>
+    Basically, the array can be visualized as below and the `renderSqaure()` doesn't change yet.
+    ```
+    [
+      'null', null, 'null',
+      'null', 'null', 'null',
+      'null', null, null,
+    ]
+    ```
