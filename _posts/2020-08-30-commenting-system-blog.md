@@ -95,7 +95,7 @@ The below is the template code used to create all the resources needed
 ```
 ## Create the ASP.NET Core Web API Project
 1. Open up terminal
-2. Check the dotnet verison installed
+2. Check the dotnet verison installed (I had 3.1)
 ```
 dotnet --version
 ```
@@ -205,20 +205,12 @@ After registering IAmazonDynamoDB in our application we are now in the position 
 4. Make sure the class is derived from `ControllerBase`
 5. Add the below line above the `class` keywords
 ```
-[Route("api/[controller]")]
-[ApiController]
-[EnableCors("AllowOrigin")] 
+[Route("api/[controller]")] // Annotates the route where this controller can be accessed
+[ApiController]             // Denotes that this class is a controller
+[EnableCors("AllowOrigin")] // Enables Cross Origin Resources Sharing throughout the controller
 ```
 
 If you get red squiggly lines, in the above three lines, import what's needed
-
-**Code Explanation:**
-
-    `[Route("api/[controller]")]` -  Annotate the route where this controller can be accessed
-
-    `[ApiController]` -  Denotes that this class is a controller
-
-    `[EnableCors("AllowOrigin")]` - Enables Cross Origin Resources Sharing throughout the controller
 
 6. Add below code inside the class:
 
@@ -275,14 +267,9 @@ We will be creating a form which will ask for username and a comment. Then upon 
 ```
     <div class="comments-view">
         <h4>Please Share Thoughts</h4>
-        <br/>
         <input id="name" type="name" class="form-control" placeholder="Enter your email">
-        <br/>
         <textarea id="comment" class="form-control" placeholder="Share thoughts here"></textarea>
-        <br/>
         <button id="submit" class="btn btn-primary" >Comment</button>
-        <br/>
-        <br/>
         <div id="all-comments" class="show-comments"><!--Comments populated by script above--></div>
     </div>
 ```
@@ -308,19 +295,19 @@ We will be creating a form which will ask for username and a comment. Then upon 
         {
             var item =
             {
-            username: $name.val(),
-            comment: $comment.val(),
-            postId: window.location.pathname,
+                username: $name.val(),
+                comment: $comment.val(),
+                postId: window.location.pathname,
             };
 
             $.ajax({
-            type: "POST",
-            url: "[your-api-url-here]]",
-            data: JSON.stringify(item),
-            contentType: "application/json",
-            success : function(){
-                alert("Comment submitted successfully")
-                location.reload();
+                type: "POST",
+                url: "[your-api-url-here]]",
+                data: JSON.stringify(item),
+                contentType: "application/json",
+                success : function(){
+                    alert("Comment submitted successfully")
+                    location.reload();
             },
             error : function(err){
                 alert("error in post" + JSON.stringify(err))
@@ -406,4 +393,6 @@ As a blog owner, I believe users shouldn't have the ability to delete comments. 
         await _amazonDynamoDb.DeleteItemAsync(request);
     }
 ```
-You have successfully implemented your own commenting system for your website / blog etc. If any of the above didn't work for you, please leave a comment below and I'll contact you via email
+You have successfully implemented your own commenting system for your website / blog etc. I will be implementing the feature of notifying the admin of a new message via email and will blog that too when done. 
+
+If any of the above didn't work for you, please leave a comment below and I'll contact you through email
