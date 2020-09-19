@@ -1,8 +1,8 @@
 ---
 layout: post
-title: React Fundamentals with Tic Tac Toe
+title: React Fundamentals By Building Tic Tac Toe
 description: Learn fundamentals of React by making an interactive Tic Tac Toe game in React
-date:   2020-09-12
+date:   2020-09-20
 ---
 In this post we will be building an interactive Tic Tac Toe game in React to learn the fundamentals of React. However, let's get familiar with React core concepts theoratically first.
 
@@ -27,8 +27,8 @@ These are the small and isolated chunks of code. In simple english, component ar
 
 Some important aspects to know about components are:
 * Must start with an upper case letter
-* Include extends `React.Component` (see example below)
-* include a `render()` method which returns the HTML
+* Include `extends React.Component` (see example below)
+* Include a `render()` method which returns the HTML
 
 So let's understand with a very simple example. If you want to place a heading on a web page saying `My name is Zain`, then it will be in its own component like below:
 <p align="center">
@@ -38,9 +38,9 @@ The above code simply says that this is a component called `Person` and it retur
 <p align="center">
   <img src="/assets/images/2020-09-12/2.png">
 </p>
-which clearly shows that `<div>` above are converted to  `React.createElement('div')` in compile time. 
+which clearly shows that `<h1>` above are converted to  `React.createElement('h1')` in compile time. 
 
-As `render` method returns a React element (displays the description of what to show to the user), the syntax of it isn't used by React developers. Instead `<div />` is used which is a lot easier and cleaner to write which is called the JSX syntax. Basically you can put any javascript code inside HTML using curly braces `{}`.
+As `render` method returns a React element (displays the description of what to show to the user), the syntax of it isn't used by React developers. Instead `<div />` is used which is a lot easier and cleaner to write and is called the JSX syntax. Basically you can put any javascript code inside HTML using curly braces `{}`.
 
 You use the above component in the `container` element or any other element like below:
 <p align="center">
@@ -48,7 +48,7 @@ You use the above component in the `container` element or any other element like
 </p>
 
 #### Props
-These are the parameters that a components takes in. `Props` are short for properties. So, if we wanted to add a name `Zain` as a `prop` (property) to our Person component it would be like:
+These are the parameters that a component takes in. `props` is short for properties. So, if we wanted to add a name `Zain` as a `prop` (property) to our `Person` component it would be like:
 <p align="center">
   <img src="/assets/images/2020-09-12/4.png">
 </p>
@@ -221,16 +221,18 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 ```
-8. Navigate to the terminal project folder in the terminal and run `npm start`. If everything went smooth you should see the below screen in browser and note that you can't interactive with any component for now.
+8. Navigate to the terminal project folder in the terminal and run `npm start`. If everything went smooth you should see the below in browser and note that you can't interact with any component for now.
 <p align="center">
   <img src="/assets/images/2020-09-12/localhost-start.png">
 </p>
-Now that our project is all set up, we will do the core functionalities features that is used in React frequently and once has to know which are:
+Now that our project is all set up, we will implement the core functionalities features that is used in React frequently and one has to know which are:
 * Pass Data Using Props (properties)
 * Making Component Interactive
 * Playing with State
 
-### Pass Data Using Props (Properties)
+### Implementing Functionality
+
+#### Pass Data Using Props (Properties)
 This is one of the core functionalities you will need when building applications in React. Let's get our hands dirty.
 
 We will pass data from Board to Square component. 
@@ -251,10 +253,10 @@ If you did everything correct, you should see the value on each square when you 
 
 In this game's example, Board is a parent and Sqaure is a child component which means you have just passed a prop from parent to child component.
 
-### Making Component Interactive
+#### Making Component Interactive
 To play the game, we need to be able to click on the squares, which is why we will make the squares clickable so that when clicked they display 'X'.
 
-1. Add an `onClick` prop to the button that is returned from the square component and display an alert
+1. Add an `onClick` prop to the button that is returned from the square component and display an alert.
     <p align="center">
       <img src="/assets/images/2020-09-12/button-clicked.png">
     </p>  
@@ -263,7 +265,7 @@ To play the game, we need to be able to click on the squares, which is why we wi
     <p align="center">
       <img src="/assets/images/2020-09-12/button-clicked-in-browser.png">
     </p>
-3. To simplify the code a bit, we will use arrow function.
+3. To simplify the code a bit, we will use arrow function from ES6.
     <p align="center">
       <img src="/assets/images/2020-09-12/arrow-function.png">
     </p>
@@ -279,13 +281,9 @@ To play the game, we need to be able to click on the squares, which is why we wi
     </p>
       What the above code does is by default, the value of state `value` is `null` and when user clicks the button, this updates the state `value` to "X" with `this.setState`(by calling this, state is updated automatically) and then displays the updated state as the text in the button with `this.state.value`
 7. Now go to the browser and click on the squares. You should see "X" appearing.
+8. Now we need to add "O" to our games as Tic Tac Toe has to have "Xs" and "0s" to be played. However, we will add them every alternative turns.
 
-    <video width="320" height="240" controls>
-      <source src="/assets/images/2020-09-12/square-with-crosses.mov">
-    </video>
-8. Now we need to add "O" to our games as Tic Tac Toe has to have "Xs" and "0s" to be played. However, we will add them every alternative turns
-
-### Determining Winner
+#### Determining Winner
 In order to determine the winner, we need to keep count of the value of the 9 squares we have in a place. This can be done in two ways:
 * **`Board` component to ask each of the square about its state**
     
@@ -303,116 +301,124 @@ In order to determine the winner, we need to keep count of the value of the 9 sq
     Basically, the array can be visualized as below and the `renderSqaure()` doesn't change yet.
     ```
     [
-      'null', null, 'null',
       'null', 'null', 'null',
-      'null', null, null,
+      'null', 'null', 'null',
+      'null', 'null', 'null',
     ]
     ```
-2. Now modify the `renderSquare` to display each squares its current value. This is done by passing the `state` called `sqaures` as a `prop`
+2. Now modify the `renderSquare` to display each squares its current value. This is done by passing the `state` called `sqaures` as a `prop`.
     <p align="center">
       <img src="/assets/images/2020-09-12/pass-state-as-prop.png">
     </p>
-    Every square will not be assigned a value of `0`, `X` or `null` for empty squares
+    Every square will be assigned a value of `0`, `X` or `null` for empty squares
+
 #### Changing Square Value
-Now, when clicked, we need to change the value of square. It will either be `0` or `X`. Since, the Booard component, fills the square and state is private to its own componenet, we can't updated the `Board` component directly from `Square`. So, we will create a function in the `Board` component, pass it to the `Square` component via `prop` and then call the function within the `Square` component 
+Now, when clicked, we need to change the value of square. It will either be `0` or `X` and `null` for empty squares. Since, the Board component, fills the square and state is private to its own componenet, we can't updated the `Board` component directly from `Square`. So, we will create a function in the `Board` component, pass it to the `Square` component via `prop` and then call the function within the `Square` component 
 
-    1. Assign a function `handleClick`in the `Board` called as a prop to `Board` component
-        <p align="center">
-          <img src="/assets/images/2020-09-12/function-call.png">
-        </p>
-    2. Now call the `onClick` function in `Square` component and delete the construct as we don't need it.
-        <p align="center">
-            <img src="/assets/images/2020-09-12/function-call-in-square.png">
-        </p>
-    Now, `onClick` method provided by the Board is called when the square is clicked. However, an error should display when you click a square and should look like the below:
-        <p align="center">
-            <img src="/assets/images/2020-09-12/error.png">
-        </p>
-    This is because we are using the `handleClick` function without implmeneting it. Let's implement it now.
-        <p align="center">
-            <img src="/assets/images/2020-09-12/handleclick.png">
-        </p>
-    What the above code does is creates a new copy of the squares array and the index that is clicked, it marks it with an `X` and updates the states
-    
-        Now, when you click the square it won't display any error. As the state is being stored in the Board component, when the Board's state changes, the Squares will display the update value automatically which is how we will choose the winner. In this scenario, we call the `Square` component a **controlled component** because it is controlled by the `Board` component.
+  1. Assign a function `handleClick` in the `Board` called as a prop to `Board` component
+      <p align="center">
+        <img src="/assets/images/2020-09-12/function-call.png">
+      </p>
+  2. Now call the `onClick` function in `Square` component and delete the construct as we don't need it.
+      <p align="center">
+          <img src="/assets/images/2020-09-12/function-call-in-square.png">
+      </p>
+  Now, `onClick` method provided by the Board is called when the square is clicked. However, an error should display when you click a square and should look like the below:
+      <p align="center">
+          <img src="/assets/images/2020-09-12/error.png">
+      </p>
+  This is because we are using the `handleClick` function without implmeneting it. Let's implement it now.
+      <p align="center">
+          <img src="/assets/images/2020-09-12/handleclick.png">
+      </p>
+  What the above code does is creates a new copy of the squares array and the index that is clicked, it marks it with an `X` and updates the states.
+  Now, when you click the square it won't display any error. As the state is being stored in the Board component, when the Board's state changes, the Squares will display the update value automatically which is how we will choose the winner. In this scenario, we call the `Square` component a **controlled component** because it is controlled by the `Board` component.
 
-        Let's change the React Component into function components because they are more readable and less tedious.
-          <p align="center">
-              <img src="/assets/images/2020-09-12/functional-component.png">
-          </p>
-        As you can tell from the above code, function components:
-          * Have `render` method
-          * Don't own state
-          * No need of arrow functions
-          * Use `props` instead of `this.props`
+      Let's change the React Component into function component because they are more readable and less tedious.
+        <p align="center">
+            <img src="/assets/images/2020-09-12/functional-component.png">
+        </p>
+      As you can tell from the above code, function components:
+      * Don't have `render` method
+      * Use key work `function` instead of `class`
+      * Don't extend anything
+      * Takes in `props`
+
 #### Take Turns
-Until now, you might have observed we only have one value `X` displaying in squares however we need `O` to display too. 
-Let's mark the first move to default to `X` in the `Board` component by setting it to true.
+  Until now, you might have observed we only have one value `X` displaying in squares however we need `O` to display too. 
+
+  Let's mark the first move to default to `X` in the `Board` component by setting it to true.
   <p align="center">
       <img src="/assets/images/2020-09-12/x-is-next.png">
   </p>
-Now, we need to display `X` in every alternative turn. So, we set NOT (`!`) operator for `setXNext` on every alternative click so that `O` can be displayed as well and save the games state sumultaneousely. Let's update the `handleClick` function to achieve this
+  Now, we need to display `X` in every alternative turn. So, we set NOT (`!`) operator for `setXNext` on every alternative click so that `O` can be displayed as well and save the game's state simultaneousely. Let's update the `handleClick` function to achieve this
   <p align="center">
-        <img src="/assets/images/2020-09-12/set-x-next.png">
+    <img src="/assets/images/2020-09-12/set-x-next.png">
   </p>
-IN the above code, we are checking where `setXNext` flag in true, if it then display `X`, if not, displaying `0` and then updating the state to the opposite of what it is currently.
+  In the above code, we are checking where `setXNext` flag is true, if it is, then display `X`, if not, displaying `0` and then update the state to the opposite of what it is currently.
 
-  <video width="320" height="240" controls>
+  <video width="320" height="240" style="display:block; margin-left:auto; margin-right:auto" controls>
     <source src="/assets/images/2020-09-12/x-and-zero.mov">
   </video>
-To make the game a user friendly, let's change the text on the title too:
+
+  To make the game a user friendly, let's change the text on the title too:
   <p align="center">
         <img src="/assets/images/2020-09-12/user-friendly-title.png">
   </p>
-Now your game should look like:
-  <video width="320" height="240" controls>
+  Now your game should look like:
+
+  <video width="320" height="240" style="display:block; margin-left:auto; margin-right:auto" controls>
     <source src="/assets/images/2020-09-12/user-friendly-title.mov">
   </video>
 
-Next move will be to show when the games ends and declaring the winner. So copy the below code and paste it at the end.
-```
-function calculateWinner(squares) {
-    const lines = [
-      [0, 1, 2],
-      [3, 4, 5],
-      [6, 7, 8],
-      [0, 3, 6],
-      [1, 4, 7],
-      [2, 5, 8],
-      [0, 4, 8],
-      [2, 4, 6],
-    ];
-    for (let i = 0; i < lines.length; i++) {
-      const [a, b, c] = lines[i];
-      if (squares[a] && squares[a] === squares[b] && squares[a] === squares[c]) {
-        return squares[a];
-      }
-    }
-    return null;
-  }
-```
-I won't be explaining the above code as it's not in the scope of this blog. 
 
-Call the above method `calculateWinner(square)` in the Board component to verify if the player has won. Then display the winner in the title.     
+  Next move will be to show when the games ends and declaring the winner. So copy the below code and paste it at the end.
+  ```
+  function calculateWinner(squares) {
+      const lines = [
+        [0, 1, 2],
+        [3, 4, 5],
+        [6, 7, 8],
+        [0, 3, 6],
+        [1, 4, 7],
+        [2, 5, 8],
+        [0, 4, 8],
+        [2, 4, 6],
+      ];
+      for (let i = 0; i < lines.length; i++) {
+        const [a, b, c] = lines[i];
+        if (squares[a] && squares[a] === squares[b] && squares[a] === squares[c]) {
+          return squares[a];
+        }
+      }
+      return null;
+    }
+  ```
+  I won't be explaining the above code as it's not in the scope of this blog. 
+
+  Call the above method `calculateWinner(square)` in the Board component to verify if the player has won. Then display the winner in the title.
+
   <p align="center">
         <img src="/assets/images/2020-09-12/winner-found.png">
   </p> 
-In the above code, we are calculating the winner from the method `calculateWinner(squares)`, then we check the value of `winnerIs`. If it is true, we end the game showing the winner and if not, we give the next person the turn.
+  In the above code, we are calculating the winner from the method `calculateWinner(squares)`, then we check the value of `winnerIs`. If it is true, we end the game showing the winner and if not, we give the next person the turn.
 
-We still have one fallback in the Board Component.`handleClick` method is always fired even a player has won. We will prevent that by returning it straight way without listening to the click. Add the below lines after we create a new array in `handleClick`.
-```
-  if (calculateWinner(squares) || squares[i]) {
-          return;
-  }
-```
-Now your `handleClick` function should look like this
+  We still have one fallback in the Board Component.`handleClick` method is always fired even a player has won. We will prevent that by returning it straight way without listening to the click. Add the below lines after we create a new array in `handleClick`.
+  ```
+    if (calculateWinner(squares) || squares[i]) {
+            return;
+    }
+  ```
+  Now your `handleClick` function should look like this
+
   <p align="center">
         <img src="/assets/images/2020-09-12/handleClick-final.png">
   </p>
 
-Now you can start playing the game and I should look like
-  <video width="320" height="240" controls>
+  Now you can start playing the game and I should look like
+
+  <video width="320" height="240" style="display:block; margin-left:auto; margin-right:auto" controls>
     <source src="/assets/images/2020-09-12/final-demo.mov">
   </video>
 
-Hope it was useful to you.
+  Hope it was useful to you.
