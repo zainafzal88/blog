@@ -308,3 +308,111 @@ In order to determine the winner, we need to keep count of the value of the 9 sq
       'null', null, null,
     ]
     ```
+2. Now modify the `renderSquare` to display each squares its current value. This is done by passing the `state` called `sqaures` as a `prop`
+    <p align="center">
+      <img src="/assets/images/2020-09-12/pass-state-as-prop.png">
+    </p>
+    Every square will not be assigned a value of `0`, `X` or `null` for empty squares
+#### Changing Square Value
+Now, when clicked, we need to change the value of square. It will either be `0` or `X`. Since, the Booard component, fills the square and state is private to its own componenet, we can't updated the `Board` component directly from `Square`. So, we will create a function in the `Board` component, pass it to the `Square` component via `prop` and then call the function within the `Square` component 
+
+    1. Assign a function `handleClick`in the `Board` called as a prop to `Board` component
+        <p align="center">
+          <img src="/assets/images/2020-09-12/function-call.png">
+        </p>
+    2. Now call the `onClick` function in `Square` component and delete the construct as we don't need it.
+        <p align="center">
+            <img src="/assets/images/2020-09-12/function-call-in-square.png">
+        </p>
+    Now, `onClick` method provided by the Board is called when the square is clicked. However, an error should display when you click a square and should look like the below:
+        <p align="center">
+            <img src="/assets/images/2020-09-12/error.png">
+        </p>
+    This is because we are using the `handleClick` function without implmeneting it. Let's implement it now.
+        <p align="center">
+            <img src="/assets/images/2020-09-12/handleclick.png">
+        </p>
+    What the above code does is creates a new copy of the squares array and the index that is clicked, it marks it with an `X` and updates the states
+    
+        Now, when you click the square it won't display any error. As the state is being stored in the Board component, when the Board's state changes, the Squares will display the update value automatically which is how we will choose the winner. In this scenario, we call the `Square` component a **controlled component** because it is controlled by the `Board` component.
+
+        Let's change the React Component into function components because they are more readable and less tedious.
+          <p align="center">
+              <img src="/assets/images/2020-09-12/functional-component.png">
+          </p>
+        As you can tell from the above code, function components:
+          * Have `render` method
+          * Don't own state
+          * No need of arrow functions
+          * Use `props` instead of `this.props`
+#### Take Turns
+Until now, you might have observed we only have one value `X` displaying in squares however we need `O` to display too. 
+Let's mark the first move to default to `X` in the `Board` component by setting it to true.
+  <p align="center">
+      <img src="/assets/images/2020-09-12/x-is-next.png">
+  </p>
+Now, we need to display `X` in every alternative turn. So, we set NOT (`!`) operator for `setXNext` on every alternative click so that `O` can be displayed as well and save the games state sumultaneousely. Let's update the `handleClick` function to achieve this
+  <p align="center">
+        <img src="/assets/images/2020-09-12/set-x-next.png">
+  </p>
+IN the above code, we are checking where `setXNext` flag in true, if it then display `X`, if not, displaying `0` and then updating the state to the opposite of what it is currently.
+
+  <video width="320" height="240" controls>
+    <source src="/assets/images/2020-09-12/x-and-zero.mov">
+  </video>
+To make the game a user friendly, let's change the text on the title too:
+  <p align="center">
+        <img src="/assets/images/2020-09-12/user-friendly-title.png">
+  </p>
+Now your game should look like:
+  <video width="320" height="240" controls>
+    <source src="/assets/images/2020-09-12/user-friendly-title.mov">
+  </video>
+
+Next move will be to show when the games ends and declaring the winner. So copy the below code and paste it at the end.
+```
+function calculateWinner(squares) {
+    const lines = [
+      [0, 1, 2],
+      [3, 4, 5],
+      [6, 7, 8],
+      [0, 3, 6],
+      [1, 4, 7],
+      [2, 5, 8],
+      [0, 4, 8],
+      [2, 4, 6],
+    ];
+    for (let i = 0; i < lines.length; i++) {
+      const [a, b, c] = lines[i];
+      if (squares[a] && squares[a] === squares[b] && squares[a] === squares[c]) {
+        return squares[a];
+      }
+    }
+    return null;
+  }
+```
+I won't be explaining the above code as it's not in the scope of this blog. 
+
+Call the above method `calculateWinner(square)` in the Board component to verify if the player has won. Then display the winner in the title.     
+  <p align="center">
+        <img src="/assets/images/2020-09-12/winner-found.png">
+  </p> 
+In the above code, we are calculating the winner from the method `calculateWinner(squares)`, then we check the value of `winnerIs`. If it is true, we end the game showing the winner and if not, we give the next person the turn.
+
+We still have one fallback in the Board Component.`handleClick` method is always fired even a player has won. We will prevent that by returning it straight way without listening to the click. Add the below lines after we create a new array in `handleClick`.
+```
+  if (calculateWinner(squares) || squares[i]) {
+          return;
+  }
+```
+Now your `handleClick` function should look like this
+  <p align="center">
+        <img src="/assets/images/2020-09-12/handleClick-final.png">
+  </p>
+
+Now you can start playing the game and I should look like
+  <video width="320" height="240" controls>
+    <source src="/assets/images/2020-09-12/final-demo.mov">
+  </video>
+
+Hope it was useful to you.
