@@ -93,6 +93,9 @@ The below is the template code used to create all the resources needed
     }
     }
 ```
+The above template creates from the command `dotnet new -i Amazon.Lambda.Templates` and what it creates is a serverless function, API Gateway and DynamoDB table.
+Lambda (serverless) function is triggered by API Gateway which in turn does CRUD operations in DynamoDB.
+
 ## Create the ASP.NET Core Web API Project
 1. Open up terminal
 2. Check the dotnet verison installed (I had 3.1)
