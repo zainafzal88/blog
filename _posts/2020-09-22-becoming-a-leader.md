@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Beocming a Project Lead
+title: Becoming a Project Lead
 description: My transition from a Developer to a Project Lead
 date:   2020-09-22
 ---
