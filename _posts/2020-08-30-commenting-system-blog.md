@@ -26,6 +26,11 @@ I wanted to create a commenting system for my [blog](https://blogs.roarcoder.dev
 * .NET Core [SDK](https://dotnet.microsoft.com/download/dotnet-core/3.1) and [Runtime](https://dotnet.microsoft.com/download/dotnet-core/3.1) installed (if you haven't got them, install them from the given links)
 * .NET CLI
 
+## Architecture
+<p align="center">
+  <img src="/assets/images/2020-08-30/architecture.png">
+</p>
+
 ## Serverless Template
 The below is the template code used to create all the resources needed.
 ```
