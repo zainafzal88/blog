@@ -1,10 +1,10 @@
 ---
 layout: post
-title:  Build a Commenting System Using SAM in .NET
-description: This is a walkthrough of how I built my commenting system for my blog with ASP.NET Core Web API and AWS DynamoDB using SAM
+title:  Commenting System Using AWS SAM + ASP.NET Core
+description: This is a walkthrough of how I built my commenting system for my blog with ASP.NET Core Web API, Lambda and AWS DynamoDB using AWS SAM
 date:   2020-08-30
 ---
-I wanted to create a commenting system for my blog. My friend Paul encouraged me to build my own instead of using an off-the-shelve one. I thought it will be a good exercise to know how the commenting system are actually built. Below I share the steps involved in getting this system up and running!
+I wanted to create a commenting system for my [blog](https://blogs.roarcoder.dev/). My friend Paul encouraged me to build my own instead of using an off-the-shelve one. The reason why I agreed is because it sounded like fun challenge as I had never created one before. I thought it will be a good exercise to know how the commenting systems are actually built and work inside out. Below I share the steps involved in getting this system up and running!
 
 ## What's Covered
 * Serverless Template
@@ -15,6 +15,11 @@ I wanted to create a commenting system for my blog. My friend Paul encouraged me
 * Inserting Comment into AWS DynamoDB
 * Deleting Comment From DynamoDB
 
+## Technologies Used
+* .NET Core  - Cross platform compatible
+* AWS SAM - Cost effective and quick to build infrastructure (as code)
+* Swagger - Test API interactively through browser
+
 ## Prerequisites:
 * AWS account
 * Knowledge of C#, Javascript, HTML and CSS
@@ -22,75 +27,75 @@ I wanted to create a commenting system for my blog. My friend Paul encouraged me
 * .NET CLI
 
 ## Serverless Template
-The below is the template code used to create all the resources needed
+The below is the template code used to create all the resources needed.
 ```
     {
-    "AWSTemplateFormatVersion": "2010-09-09",
-    "Transform": "AWS::Serverless-2016-10-31",
-    "Description": "An AWS Serverless Application that uses the ASP.NET Core framework running in Amazon Lambda.",
-    "Resources": {
-        "AspNetCoreFunction": {
-        "Type": "AWS::Serverless::Function",
-        "Properties": {
-            "Handler": "CommentsAPI::CommentsAPI.LambdaEntryPoint::FunctionHandlerAsync",
-            "Runtime": "dotnetcore3.1",
-            "CodeUri": "",
-            "MemorySize": 256,
-            "Timeout": 30,
-            "Role": null,
-            "Policies": [
-            "AWSLambdaFullAccess",
-            "AmazonDynamoDBFullAccess"
-            ],
-            "Events": {
-            "ProxyResource": {
-                "Type": "Api",
+        "AWSTemplateFormatVersion": "2010-09-09",
+        "Transform": "AWS::Serverless-2016-10-31",
+        "Description": "An AWS Serverless Application that uses the ASP.NET Core framework running in Amazon Lambda.",
+        "Resources": {
+            "AspNetCoreFunction": {
+                "Type": "AWS::Serverless::Function",
                 "Properties": {
-                "Path": "/{proxy+}",
-                "Method": "ANY"
+                    "Handler": "CommentsAPI::CommentsAPI.LambdaEntryPoint::FunctionHandlerAsync",
+                    "Runtime": "dotnetcore3.1",
+                    "CodeUri": "",
+                    "MemorySize": 256,
+                    "Timeout": 30,
+                    "Role": null,
+                    "Policies": [
+                    "AWSLambdaFullAccess",
+                    "AmazonDynamoDBFullAccess"
+                    ],
+                    "Events": {
+                        "ProxyResource": {
+                            "Type": "Api",
+                            "Properties": {
+                            "Path": "/{proxy+}",
+                            "Method": "ANY"
+                            }
+                        },
+                        "RootResource": {
+                            "Type": "Api",
+                            "Properties": {
+                            "Path": "/",
+                            "Method": "ANY"
+                            }
+                        }
+                    }
                 }
             },
-            "RootResource": {
-                "Type": "Api",
+            "CommentsTable": {
+                "Type": "AWS::DynamoDB::Table",
                 "Properties": {
-                "Path": "/",
-                "Method": "ANY"
+                    "AttributeDefinitions": [
+                    {
+                        "AttributeName": "id",
+                        "AttributeType": "S"
+                    }
+                    ],
+                    "KeySchema" : [ 
+                    {
+                        "AttributeName": "id",
+                        "KeyType": "HASH"
+                    }
+                    ],
+                    "TableName":"comments",
+                    "ProvisionedThroughput": {
+                    "ReadCapacityUnits": "1",
+                    "WriteCapacityUnits": "1"
+                    }
                 }
             }
-            }
-        }
         },
-        "CommentsTable": {
-        "Type": "AWS::DynamoDB::Table",
-        "Properties": {
-            "AttributeDefinitions": [
-            {
-                "AttributeName": "id",
-                "AttributeType": "S"
-            }
-            ],
-            "KeySchema" : [ 
-            {
-                "AttributeName": "id",
-                "KeyType": "HASH"
-            }
-            ],
-            "TableName":"comments",
-            "ProvisionedThroughput": {
-            "ReadCapacityUnits": "1",
-            "WriteCapacityUnits": "1"
+        "Outputs": {
+            "ApiURL": {
+            "Description": "API endpoint URL for Prod environment",
+                "Value": {
+                    "Fn::Sub": "https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/swagger"
+                }
             }
         }
-        }
-    },
-    "Outputs": {
-        "ApiURL": {
-        "Description": "API endpoint URL for Prod environment",
-        "Value": {
-            "Fn::Sub": "https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/swagger"
-        }
-        }
-    }
     }
 ```
 The above template creates from the command `dotnet new -i Amazon.Lambda.Templates` and what it creates is a serverless function, API Gateway and DynamoDB table.
@@ -136,17 +141,18 @@ dotnet run
 
 ## Integrating Swagger UI
 
-1. We will be using [Swagger](https://swagger.io/) to document our Web API and test it from the browser. Add the NuGet package for Swagger
+We will be using [Swagger](https://swagger.io/) to document our Web API and test it from the browser. I like Swagger because it generates a UI with which you can interect and test your API in the browser.
+1. Add the NuGet(like npm but for .NET development) package for Swagger
 ```
 dotnet add package Swashbuckle.AspNetCore
 ```
 2. To use it, you need to register it by adding the below code in the `ConfigureServices` method in `Startup.cs` file
 ```
-services.AddSwaggerGen(c =>{
-c.SwaggerDoc("v1", new OpenApiInfo { Title = "Comments API", Version = "v1" });
+services.AddSwaggerGen(c => {
+        c.SwaggerDoc("v1", new OpenApiInfo { Title = "Comments API", Version = "v1" });
 });
 ```
-3. Add import of `Microsoft.OpenApi.Models` on the top of the page
+3. Add import of `Microsoft.OpenApi.Models` on the top of the page which allows you to describes your API's endpoints
 ```
 using Microsoft.OpenApi.Models;
 ```
@@ -155,8 +161,8 @@ using Microsoft.OpenApi.Models;
 app.UseSwagger();
 app.UseSwaggerUI(c =>
 { 
-    c.SwaggerEndpoint("v1/swagger.json", "Comments");
-    c.RoutePrefix = "swagger";
+        c.SwaggerEndpoint("v1/swagger.json", "Comments");
+        c.RoutePrefix = "swagger";
 });
 ```
 ![](/assets/images/2020-08-30/swagger-config.png)
@@ -169,7 +175,7 @@ app.UseSwaggerUI(c =>
 </p>
 
 ## Connection to AWS DynamoDB
-1. Navigate to you project folder. We will add two NuGet packages.These are essential to make a connection to DynamoDB
+1. Navigate to you project folder. We will add two NuGet packages. These are essential to make a connection to DynamoDB.
 ```
 dotnet add package AWSSDK.DynamoDBv2
 dotnet add package AWSSDK.Extensions.NETCore.Setup 
@@ -195,7 +201,7 @@ services.AddAWSService<Amazon.S3.IAmazonS3>();
     
     Now, that we are connected, let's read from database
 
-    As we don't have anything to read from the database, first, we add a a record in the database manually to test our reading functionality and I am assuming you know how to add a record in the table.
+    As we don't have any data to read from the database, let's add a record in the database manually to test our `GET` functionality. I am assuming you know how to add a record in the table so won't be coverting this.
 
 ## Getting all Comments from AWS DynamoDB (By Post)
 In this section, we will get all the comments by Post. So, each post displays only comments that related to it
@@ -212,8 +218,12 @@ After registering IAmazonDynamoDB in our application we are now in the position 
 [ApiController]             // Denotes that this class is a controller
 [EnableCors("AllowOrigin")] // Enables Cross Origin Resources Sharing throughout the controller
 ```
-
-If you get red squiggly lines, in the above three lines, import what's needed
+If you get red squiggly lines, on the above three lines, import the below:
+```
+using Microsoft.AspNetCore.Mvc;
+using System.Threading.Tasks;
+using System.Collections.Generic;
+```
 
 6. Add below code inside the class:
 
@@ -261,7 +271,7 @@ If you get red squiggly lines, in the above three lines, import what's needed
         return response.Item["username"].S;
     }
 ```
-If you get red squiggly lines any where, just add all the imports needed.
+If you get red squiggly lines any where, add all the imports needed.
 
 ## Inserting Comment into AWS DynamoDB
 We will be creating a form which will ask for username and a comment. Then upon pressing submit button, it will write the data to DynamoDB.
@@ -332,14 +342,14 @@ That is all we needed to do in the frontend.
 ```
 namespace CommentsAPI.Models
 {
-    public class Comments
-    {
-        public string Username { get; set; }
+        public class Comments
+        {
+            public string Username { get; set; }
 
-        public string Comment { get; set; }
-        
-        public string PostId { get; set; }
-    }
+            public string Comment { get; set; }
+            
+            public string PostId { get; set; }
+        }
 }
 ```
 4. Navigate to the **CommentsController** and add the below code:
