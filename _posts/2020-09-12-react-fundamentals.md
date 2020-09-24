@@ -9,7 +9,7 @@ In this post we will be building an interactive Tic Tac Toe game in React to lea
 ### Pre-requisites
 * HTML, CSS and Javscript
 * Your favourite text editor
-* ES6 ( latest version of Javscript at the time of this blog )
+* ES6
 * [Node](https://nodejs.org/en/) installed
 
 ### What is React
