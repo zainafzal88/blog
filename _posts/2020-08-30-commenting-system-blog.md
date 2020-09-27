@@ -104,7 +104,7 @@ The below is the template code used to create all the resources needed.
     }
 ```
 The above template creates from the command `dotnet new -i Amazon.Lambda.Templates` and what it creates is a serverless function, API Gateway and DynamoDB table.
-Lambda (serverless) function is triggered by API Gateway which in turn does CRUD operations in DynamoDB.
+Lambda (serverless) function is triggered by API Gateway which in turn performs CRUD operations in DynamoDB.
 
 ## Create the ASP.NET Core Web API Project
 1. Open up terminal
@@ -147,7 +147,7 @@ dotnet run
 ## Integrating Swagger UI
 
 We will be using [Swagger](https://swagger.io/) to document our Web API and test it from the browser. I like Swagger because it generates a UI with which you can interect and test your API in the browser.
-1. Add the NuGet(like npm but for .NET development) package for Swagger
+1. Add the NuGet(like npm but for .NET development) package to use Swagger in your application
 ```
 dotnet add package Swashbuckle.AspNetCore
 ```
@@ -206,7 +206,23 @@ services.AddAWSService<Amazon.S3.IAmazonS3>();
     
     Now, that we are connected, let's read from database
 
-    As we don't have any data to read from the database, let's add a record in the database manually to test our `GET` functionality. I am assuming you know how to add a record in the table so won't be coverting this.
+    As we don't have any data to read from the database, let's add a record in the database manually to test our `GET` functionality.
+
+### Insert Record in DynamoDB
+Open AWS CLI and run the below command
+```
+        aws dynamodb put-item \
+            --table-name <your-table-name> \
+            --item '{ 
+                "ID": {"S": "b44da539-f696-4ed8-881d-29c569416114"}, 
+                "comment": {"S": "This is a test comment"} , 
+                "date": {"S": "9/19/2020 12:36:22 PM"},
+                "postId": {"S": "test"},
+                "username": {"S": "test@gmail.com"}
+            }' \
+            --return-consumed-capacity TOTAL
+```
+The above should create a record in your DynamoDB table. Open AWS console and navigate to DynamoDB table to ensure it's created.
 
 ## Getting all Comments from AWS DynamoDB (By Post)
 In this section, we will get all the comments by Post. So, each post displays only comments that related to it
