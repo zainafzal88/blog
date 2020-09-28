@@ -239,11 +239,11 @@ After registering IAmazonDynamoDB in our application we are now in the position 
 [ApiController]             // Denotes that this class is a controller
 [EnableCors("AllowOrigin")] // Enables Cross Origin Resources Sharing throughout the controller
 ```
-If you get red squiggly lines, on the above three lines, import the below:
+If you get compilation error (red squiggly lines) on the above three lines, this means that you need to add (click the squiggly line, a light bulb will appear, click bulb and choose the imports below respectively) or simply add below `using` statements at the top of the page:
 ```
-using Microsoft.AspNetCore.Mvc;
-using System.Threading.Tasks;
-using System.Collections.Generic;
+using Microsoft.AspNetCore.Mvc;     // Enable MVC web framework
+using System.Threading.Tasks;       // Provides types and simplifies asynchronous code
+using Microsoft.AspNetCore.Cors;    // Enables Cross Region Resource Sharing
 ```
 
 6. Add below code inside the class:
