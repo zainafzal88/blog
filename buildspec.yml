@@ -1,0 +1,18 @@
+version: 0.2
+
+env:
+  parameter-store:
+    BUCKET: /codebuild/blogBucket
+
+phases:
+  build:
+    commands:
+        - echo "******** Building Jekyll site ********"
+        - gem install jekyll-feed -v 0.3.1
+        - jekyll build
+  post_build:
+    commands:
+        - echo "******** Uploading to S3 ********"
+        - aws s3 sync _site/ s3://$BUCKET
+        - echo "******** Invalidate Cache ********"
+        - aws cloudfront create-invalidation --distribution-id E2EDN7QC8COSCJ --paths '/*'
