@@ -36,12 +36,13 @@
 
     $("#submit").on('click', function(){
 
-      var reg =/<(.|\n)*?>/g;
+      var reg = '[a-zA-Z0-9]+';
 
-      if (reg.test($('#comment').val()) == true) {
-        var errorText ='HTML Tags Not Allowed';
-        alert(errorText);
+    $('#comment').each(function() {
+      if ($(this).val().match(/<(\w+)((?:\s+\w+(?:\s*=\s*(?:(?:"[^"]*")|(?:'[^']*')|[^>\s]+))?)*)\s*(\/?)>/)) {
+        alert('HTML tags found');
       }
+  
       else  {
 
         var item = 
@@ -69,6 +70,7 @@
       $comment.val("");
     });
   });
+});
 </script>
 
   {%- include head.html -%}
